@@ -68,6 +68,7 @@ install: build
 	$(MAKE) DESTDIR=$(CURDIR)/debian/tmp install
 
 	# Development include files
+	mkdir -p $(CURDIR)/debian/liblqr-1-0-dev/usr/include
 	mv $(CURDIR)/debian/tmp/usr/include $(CURDIR)/debian/liblqr-1-0-dev/usr/
 	mkdir -p $(CURDIR)/debian/liblqr-1-0-dev/usr/lib
 	# libtool linkage information file
