@@ -91,8 +91,8 @@ binary-arch: build install
 	dh_testdir
 	dh_testroot
 	dh_installchangelogs	ChangeLog
-	dh_installdocs		-pliblqr-1-0-dev docs/liblqr_manual.html docs/html
-	dh_installexamples
+	dh_installdocs
+	dh_installexamples	examples/*
 #	dh_install
 #	dh_installmenu
 #	dh_installdebconf	
