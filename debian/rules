@@ -30,10 +30,13 @@ major=2
 config.status: configure
 	dh_testdir
 	# Add here commands to configure the package.
+	# it saves upstream version of config.{sub,guess}
 ifneq "$(wildcard /usr/share/misc/config.sub)" ""
+	[ -e config.sub.debian ] || cp -pf config.sub config.sub.debian
 	cp -f /usr/share/misc/config.sub config.sub
 endif
 ifneq "$(wildcard /usr/share/misc/config.guess)" ""
+	[ -e config.guess.debian ] || cp -pf config.guess config.guess.debian
 	cp -f /usr/share/misc/config.guess config.guess
 endif
 	./configure $(CROSS) --prefix=/usr CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs"
@@ -59,6 +62,10 @@ clean:
 
 	rm -rf docs/html
 	rm -f config.sub config.guess
+
+	# restore upstream version of config.{sub,guess}
+	[ ! -e config.sub.debian ] || cp -pf config.sub.debian config.sub
+	[ ! -e config.guess.debian ] || cp -pf config.guess.debian config.guess
 
 	dh_clean 
 
