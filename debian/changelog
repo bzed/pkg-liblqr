@@ -1,5 +1,5 @@
-liblqr (0.1.0-1) UNRELEASED; urgency=low
+liblqr (0.1.0-1) unstable; urgency=low
 
   * Initial release (Closes: #483046)
 
- -- Sandro Tosi <matrixhasu@gmail.com>  Sun, 01 Jun 2008 11:59:50 +0200
+ -- Sandro Tosi <matrixhasu@gmail.com>  Sun, 01 Jun 2008 18:51:33 +0200
