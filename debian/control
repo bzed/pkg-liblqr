@@ -6,8 +6,8 @@ Build-Depends: debhelper (>= 6), autotools-dev, xsltproc, docbook-xsl, docbook-x
 Standards-Version: 3.7.3
 Section: libs
 Homepage: http://liblqr.wikidot.com/
-Vcs-Browser: http://git.recluse.de/?p=shared/pkg-liblqr.git;a=summary
-Vcs-Git: git://git.recluse.de/shared/pkg-liblqr.git
+Vcs-Browser: http://git.recluse.de/?p=debian/pkg-liblqr.git;a=summary
+Vcs-Git: git://git.recluse.de/debian/pkg-liblqr.git
 
 Package: liblqr-1-0-dev
 Section: libdevel
