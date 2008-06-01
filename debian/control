@@ -2,7 +2,7 @@ Source: liblqr
 Priority: extra
 Maintainer: Bernd Zeimetz <bzed@debian.org>
 Uploaders: Sandro Tosi <matrixhasu@gmail.com>
-Build-Depends: debhelper (>= 6), autotools-dev, xsltproc, docbook-xsl, pkg-config
+Build-Depends: debhelper (>= 6), autotools-dev, xsltproc, docbook-xsl, pkg-config, libglib2.0-dev
 Standards-Version: 3.7.3
 Section: libs
 Homepage: http://liblqr.wikidot.com/
