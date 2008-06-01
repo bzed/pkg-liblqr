@@ -61,7 +61,6 @@ clean:
 	$(MAKE) -C docs clean
 
 	rm -rf docs/html
-	rm -f config.sub config.guess
 
 	# restore upstream version of config.{sub,guess}
 	[ ! -e config.sub.debian ] || cp -pf config.sub.debian config.sub
