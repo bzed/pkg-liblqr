@@ -69,22 +69,8 @@ install: build
 	dh_installdirs
 
 	# Add here commands to install the package into debian/tmp
+	# we install all in debian/tmp, in $PKG.install we separate files
 	$(MAKE) DESTDIR=$(CURDIR)/debian/tmp install
-
-	# Development include files
-	###mkdir -p $(CURDIR)/debian/liblqr-1-0-dev/usr/include
-	###mv $(CURDIR)/debian/tmp/usr/include $(CURDIR)/debian/liblqr-1-0-dev/usr/
-	###mkdir -p $(CURDIR)/debian/liblqr-1-0-dev/usr/lib
-	# libtool linkage information file
-	###mv $(CURDIR)/debian/tmp/usr/lib/liblqr-1.la $(CURDIR)/debian/liblqr-1-0-dev/usr/lib/
-	# development linkage file, used when other programs are linked with -lxxx
-	###mv $(CURDIR)/debian/tmp/usr/lib/liblqr-1.so $(CURDIR)/debian/liblqr-1-0-dev/usr/lib/
-	# Some information required for pkgconfig
-	###mv $(CURDIR)/debian/tmp/usr/lib/pkgconfig $(CURDIR)/debian/liblqr-1-0-dev/usr/lib/
-
-	###mkdir -p $(CURDIR)/debian/liblqr-1-0/usr/lib/
-	###mv $(CURDIR)/debian/tmp/usr/lib/liblqr-1.so.0* $(CURDIR)/debian/liblqr-1-0/usr/lib/
-
 
 # Build architecture-independent files here.
 binary-indep: build install
