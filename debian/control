@@ -12,7 +12,7 @@ Vcs-Git: git://git.recluse.de/shared/pkg-liblqr.git
 Package: liblqr-1-0-dev
 Section: libdevel
 Architecture: any
-Depends: liblqr-1-0 (= ${binary:Version}), libc-dev
+Depends: liblqr-1-0 (= ${binary:Version}), libc6-dev | libc-dev
 Provides: liblqr-dev
 Conflicts: liblqr-dev
 Description: converts plain array images in multi-size representation (developments files)
