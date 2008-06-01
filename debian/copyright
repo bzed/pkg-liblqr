@@ -1,24 +1,44 @@
 This package was debianized by Sandro Tosi <matrixhasu@gmail.com> on
 Mon, 26 May 2008 21:49:22 +0200.
 
-It was downloaded from <url://example.com>
+It was downloaded from http://liblqr.wikidot.com/en:download-page
 
-Upstream Author(s): 
+Upstream Author:
 
-    <put author's name and email here>
-    <likewise for another author>
+    Carlo Baldassi <carlobaldassi@gmail.com>
 
 Copyright: 
 
-    <Copyright (C) YYYY Name OfAuthor>
-    <likewise for another author>
+    Copyright (C) 2007 Carlo Baldassi <carlobaldassi@gmail.com>
 
-License:
+License (GPLv3):
 
-    <Put the license of the package here indented by 4 spaces>
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+On a Debian system the complete text of the GNU General Public License
+can be found in the file `/usr/share/common-licenses/GPL'.
+
+License (LGPLv3):
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation; version 3 dated June, 2007.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+On a Debian system the complete text of the GNU Lesse General Public License
+can be found in the file `/usr/share/common-licenses/LGPL'.
 
 The Debian packaging is (C) 2008, Sandro Tosi <matrixhasu@gmail.com> and
 is licensed under the GPL, see `/usr/share/common-licenses/GPL'.
-
-# Please also look if there are files or directories which have a
-# different copyright/license attached and list them here.
