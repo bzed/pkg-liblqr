@@ -15,7 +15,7 @@ Architecture: any
 Depends: liblqr-1-0 (= ${binary:Version}), libc6-dev | libc-dev
 Provides: liblqr-dev
 Conflicts: liblqr-dev
-Description: converts plain array images in multi-size representation (developments files)
+Description: converts plain array images into multi-size representation (developments files)
  The LiquidRescale (lqr) library provides a C/C++ API for performing
  non-uniform resizing of images by the seam-carving technique.
  .
@@ -52,7 +52,7 @@ Package: liblqr-1-0
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: converts plain array images in multi-size representation
+Description: converts plain array images into multi-size representation
  The LiquidRescale (lqr) library provides a C/C++ API for performing
  non-uniform resizing of images by the seam-carving technique.
  .
@@ -90,7 +90,7 @@ Section: libdevel
 Priority: extra
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, liblqr-1-0 (= ${binary:Version})
-Description: converts plain array images in multi-size representation (debug package)
+Description: converts plain array images into multi-size representation (debug package)
  The LiquidRescale (lqr) library provides a C/C++ API for performing
  non-uniform resizing of images by the seam-carving technique.
  .
@@ -121,4 +121,5 @@ Description: converts plain array images in multi-size representation (debug pac
  Shamir, which can be found at
  http://www.faculty.idc.ac.il/arik/imret.pdf
  .
- This package contains the debug version of shared library found in liblqr-1-0.
+ This package contains the debug information of shared library found in
+ liblqr-1-0.
