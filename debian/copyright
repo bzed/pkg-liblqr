@@ -11,22 +11,7 @@ Copyright:
 
     Copyright (C) 2007 Carlo Baldassi <carlobaldassi@gmail.com>
 
-License (GPLv3):
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-On a Debian system the complete text of the GNU General Public License
-can be found in the file `/usr/share/common-licenses/GPL'.
-
-License (LGPLv3):
+License:
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -42,3 +27,7 @@ can be found in the file `/usr/share/common-licenses/LGPL'.
 
 The Debian packaging is (C) 2008, Sandro Tosi <matrixhasu@gmail.com> and
 is licensed under the GPL, see `/usr/share/common-licenses/GPL'.
+
+These files have a different license:
+Files: examples/*
+License: GPLv3 (or later)
