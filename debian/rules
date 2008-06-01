@@ -63,8 +63,8 @@ clean:
 	rm -rf docs/html
 
 	# restore upstream version of config.{sub,guess}
-	[ ! -e config.sub.debian ] || cp -pf config.sub.debian config.sub
-	[ ! -e config.guess.debian ] || cp -pf config.guess.debian config.guess
+	[ ! -e config.sub.debian ] || mv -f config.sub.debian config.sub
+	[ ! -e config.guess.debian ] || mv -f config.guess.debian config.guess
 
 	dh_clean 
 
