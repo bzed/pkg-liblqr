@@ -4,6 +4,10 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
+# Package name
+PACKAGE=liblqr-1-0
+
+
 # These are used for cross-compiling and for saving the configure script
 # from having to guess our platform (since we know it already)
 DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
@@ -68,18 +72,18 @@ install: build
 	$(MAKE) DESTDIR=$(CURDIR)/debian/tmp install
 
 	# Development include files
-	mkdir -p $(CURDIR)/debian/liblqr-1-0-dev/usr/include
-	mv $(CURDIR)/debian/tmp/usr/include $(CURDIR)/debian/liblqr-1-0-dev/usr/
-	mkdir -p $(CURDIR)/debian/liblqr-1-0-dev/usr/lib
+	###mkdir -p $(CURDIR)/debian/liblqr-1-0-dev/usr/include
+	###mv $(CURDIR)/debian/tmp/usr/include $(CURDIR)/debian/liblqr-1-0-dev/usr/
+	###mkdir -p $(CURDIR)/debian/liblqr-1-0-dev/usr/lib
 	# libtool linkage information file
-	mv $(CURDIR)/debian/tmp/usr/lib/liblqr-1.la $(CURDIR)/debian/liblqr-1-0-dev/usr/lib/
+	###mv $(CURDIR)/debian/tmp/usr/lib/liblqr-1.la $(CURDIR)/debian/liblqr-1-0-dev/usr/lib/
 	# development linkage file, used when other programs are linked with -lxxx
-	mv $(CURDIR)/debian/tmp/usr/lib/liblqr-1.so $(CURDIR)/debian/liblqr-1-0-dev/usr/lib/
+	###mv $(CURDIR)/debian/tmp/usr/lib/liblqr-1.so $(CURDIR)/debian/liblqr-1-0-dev/usr/lib/
 	# Some information required for pkgconfig
-	mv $(CURDIR)/debian/tmp/usr/lib/pkgconfig $(CURDIR)/debian/liblqr-1-0-dev/usr/lib/
+	###mv $(CURDIR)/debian/tmp/usr/lib/pkgconfig $(CURDIR)/debian/liblqr-1-0-dev/usr/lib/
 
-	mkdir -p $(CURDIR)/debian/liblqr-1-0/usr/lib/
-	mv $(CURDIR)/debian/tmp/usr/lib/liblqr-1.so.0* $(CURDIR)/debian/liblqr-1-0/usr/lib/
+	###mkdir -p $(CURDIR)/debian/liblqr-1-0/usr/lib/
+	###mv $(CURDIR)/debian/tmp/usr/lib/liblqr-1.so.0* $(CURDIR)/debian/liblqr-1-0/usr/lib/
 
 
 # Build architecture-independent files here.
@@ -91,17 +95,16 @@ binary-arch: build install
 	dh_testdir
 	dh_testroot
 	dh_installchangelogs	ChangeLog
+	dh_install		--sourcedir=debian/tmp --list-missing
 	dh_installdocs
 	dh_installexamples	examples/*
-	dh_installman
-	dh_link
-	dh_strip
+	dh_strip		--dbg-package=$(PACKAGE)-dbg
 	dh_compress
 	dh_fixperms
 	# needed to create shlibs file
 	dh_makeshlibs
 	dh_installdeb
-	dh_shlibdeps -Lliblqr-1-0 -l$(CURDIR)/debian/liblqr-1-0/usr/lib
+	dh_shlibdeps		-Lliblqr-1-0 -l$(CURDIR)/debian/$(PACKAGE)/usr/lib
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb
