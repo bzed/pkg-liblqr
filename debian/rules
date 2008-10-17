@@ -39,7 +39,8 @@ ifneq "$(wildcard /usr/share/misc/config.guess)" ""
 	[ -e config.guess.debian ] || cp -pf config.guess config.guess.debian
 	cp -f /usr/share/misc/config.guess config.guess
 endif
-	./configure $(CROSS) --prefix=/usr CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs"
+	./configure $(CROSS) --prefix=/usr CFLAGS="$(CFLAGS)" \
+		LDFLAGS="-Wl,-z,defs" --enable-install-man
 
 build: build-stamp
 build-stamp: config.status 

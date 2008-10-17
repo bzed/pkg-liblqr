@@ -8,8 +8,10 @@ liblqr (0.2.0-1) unstable; urgency=low
       private by upstream, they are missing now. As the library is new and
       only used by one Gimp plugin now and the abi did not change for the
       plugin, there was no soname bump.
+  * debian/rules:
+    - Install manpages on build.
 
- -- Bernd Zeimetz <bzed@debian.org>  Fri, 17 Oct 2008 10:54:44 +0200
+ -- Bernd Zeimetz <bzed@debian.org>  Fri, 17 Oct 2008 11:04:13 +0200
 
 liblqr (0.1.0-1) unstable; urgency=low
 
