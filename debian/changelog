@@ -1,3 +1,11 @@
+liblqr (0.2.0-1) unstable; urgency=low
+
+  * New Upstream Version
+  * debian/watch:
+    - Updating watch file to fit the new filename. 
+
+ -- Bernd Zeimetz <bzed@debian.org>  Fri, 17 Oct 2008 10:49:06 +0200
+
 liblqr (0.1.0-1) unstable; urgency=low
 
   * Initial release (Closes: #483046)
