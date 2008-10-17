@@ -1,5 +1,5 @@
 /* LiquidRescaling Library
- * Copyright (C) 2007 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
+ * Copyright (C) 2007-2008 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
  * All Rights Reserved.
  *
  * This library implements the algorithm described in the paper
@@ -9,7 +9,7 @@
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation; version 3 dated June, 2007.
+ * the Free Software Foundation; version 3 dated June, 2007-2008.
 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -31,6 +31,7 @@
 
 /**** SEAMS BUFFER FUNCTIONS ****/
 
+LQR_PUBLIC
 LqrVMap*
 lqr_vmap_new (gint * buffer, gint width, gint height, gint depth, gint orientation)
 {
@@ -45,6 +46,7 @@ lqr_vmap_new (gint * buffer, gint width, gint height, gint depth, gint orientati
   return vmap;
 }
 
+LQR_PUBLIC
 void
 lqr_vmap_destroy (LqrVMap * vmap)
 {
@@ -52,33 +54,43 @@ lqr_vmap_destroy (LqrVMap * vmap)
   g_free (vmap);
 }
 
+LQR_PUBLIC
 gint *
 lqr_vmap_get_data (LqrVMap *vmap)
 {
   return vmap->buffer;
 }
 
-gint lqr_vmap_get_width (LqrVMap *vmap)
+LQR_PUBLIC
+gint
+lqr_vmap_get_width (LqrVMap *vmap)
 {
   return vmap->width;
 }
 
-gint lqr_vmap_get_height (LqrVMap *vmap)
+LQR_PUBLIC
+gint
+lqr_vmap_get_height (LqrVMap *vmap)
 {
   return vmap->height;
 }
 
-gint lqr_vmap_get_depth (LqrVMap *vmap)
+LQR_PUBLIC
+gint
+lqr_vmap_get_depth (LqrVMap *vmap)
 {
   return vmap->depth;
 }
 
-gint lqr_vmap_get_orientation (LqrVMap *vmap)
+LQR_PUBLIC
+gint
+lqr_vmap_get_orientation (LqrVMap *vmap)
 {
   return vmap->orientation;
 }
 
 /* dump the visibility level of the image */
+LQR_PUBLIC
 LqrVMap*
 lqr_vmap_dump (LqrCarver * r)
 {
@@ -86,7 +98,6 @@ lqr_vmap_dump (LqrCarver * r)
   gint w, h, w1, x, y, z0, vs;
   gint * buffer;
   gint depth; 
-  gint bpp;
 
   /* save current size */
   w1 = r->w;
@@ -97,9 +108,6 @@ lqr_vmap_dump (LqrCarver * r)
   w = lqr_carver_get_width (r);
   h = lqr_carver_get_height (r);
   depth = r->w0 - r->w_start;
-
-
-  bpp = 4;
 
   TRY_N_N (buffer = g_try_new (gint, w * h));
 
@@ -141,6 +149,7 @@ lqr_vmap_dump (LqrCarver * r)
 
 
 /* dump the visibility level of the image */
+LQR_PUBLIC
 LqrRetVal
 lqr_vmap_internal_dump (LqrCarver * r)
 {
@@ -148,7 +157,6 @@ lqr_vmap_internal_dump (LqrCarver * r)
   gint w, h, w1, x, y, z0, vs;
   gint * buffer;
   gint depth; 
-  gint bpp;
 
   /* save current size */
   w1 = r->w;
@@ -159,9 +167,6 @@ lqr_vmap_internal_dump (LqrCarver * r)
   w = lqr_carver_get_width (r);
   h = lqr_carver_get_height (r);
   depth = r->w0 - r->w_start;
-
-
-  bpp = 4;
 
   CATCH_MEM (buffer = g_try_new (gint, w * h));
 
@@ -203,6 +208,7 @@ lqr_vmap_internal_dump (LqrCarver * r)
 }
 
 
+LQR_PUBLIC
 LqrRetVal
 lqr_vmap_load (LqrCarver *r, LqrVMap *vmap)
 {

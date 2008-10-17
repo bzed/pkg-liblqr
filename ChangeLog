@@ -1,3 +1,37 @@
+2008-10-12  Carlo Baldassi  <carlobaldassi@gmail.com>
+
+	* Added 32 bit and 64 bit floating point support
+	* Added get_col_depth
+	* Turned all internal floating point maps from
+	  gdouble to gfloat
+	* Collapsed all the nonstandard constructors
+	  and span functions to a single version (*_ext)
+
+2008-09-04  Carlo Baldassi  <carlobaldassi@gmail.com>
+
+	* Added set_no_dump_vmaps
+
+2008-09-04  Carlo Baldassi  <carlobaldassi@gmail.com>
+
+	* Hid private symbols
+
+2008-07-30  Carlo Baldassi  <carlobaldassi@gmail.com>
+
+	* Optimized vsmap memory management
+	* Bugfixes
+
+2008-04-06  Carlo Baldassi  <carlobaldassi@gmail.com>
+
+	* Added 16 bit support
+
+2008-02-25  Carlo Baldassi  <carlobaldassi@gmail.com>
+
+	* Added left-right switches
+
+2008-02-20  Carlo Baldassi  <carlobaldassi@gmail.com>
+
+	* Added rigidity mask
+
 2007-12-07  Carlo Baldassi  <carlobaldassi@yahoo.it>
 
 	* initial revision.

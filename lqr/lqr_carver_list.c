@@ -1,5 +1,5 @@
 /* LiquidRescaling Library
- * Copyright (C) 2007 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
+ * Copyright (C) 2007-2008 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
  * All Rights Reserved.
  *
  * This library implements the algorithm described in the paper
@@ -9,7 +9,7 @@
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation; version 3 dated June, 2007.
+ * the Free Software Foundation; version 3 dated June, 2007-2008.
 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,7 +22,7 @@
 
 #include <glib.h>
 
-#include <lqr/lqr_all.h>
+#include <lqr.h>
 
 #ifdef __LQR_DEBUG__
 #include <assert.h>
@@ -69,12 +69,14 @@ lqr_carver_list_destroy(LqrCarverList * list)
     }
 }
 
+LQR_PUBLIC
 LqrCarverList *
 lqr_carver_list_start (LqrCarver *r)
 {
   return r->attached_list;
 }
 
+LQR_PUBLIC
 LqrCarverList *
 lqr_carver_list_next (LqrCarverList * list)
 {
@@ -82,6 +84,7 @@ lqr_carver_list_next (LqrCarverList * list)
   return list->next;
 }
 
+LQR_PUBLIC
 LqrCarver *
 lqr_carver_list_current (LqrCarverList * list)
 {
@@ -89,6 +92,7 @@ lqr_carver_list_current (LqrCarverList * list)
   return list->current;
 }
 
+LQR_PUBLIC
 LqrRetVal
 lqr_carver_list_foreach (LqrCarverList * list, LqrCarverFunc func, LqrDataTok data)
 {

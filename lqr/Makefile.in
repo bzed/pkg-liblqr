@@ -57,10 +57,11 @@ am__installdirs = "$(DESTDIR)$(lqrdir)" "$(DESTDIR)$(lqr_includedir)" \
 	"$(DESTDIR)$(lqr_include0dir)"
 lqrLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(lqr_LTLIBRARIES)
-liblqr_1_la_LIBADD =
+am__DEPENDENCIES_1 =
+liblqr_1_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
 am_liblqr_1_la_OBJECTS = lqr_gradient.lo lqr_cursor.lo lqr_carver.lo \
-	lqr_carver_list.lo lqr_carver_bias.lo lqr_vmap.lo \
-	lqr_vmap_list.lo lqr_progress.lo
+	lqr_carver_list.lo lqr_carver_bias.lo lqr_carver_rigmask.lo \
+	lqr_vmap.lo lqr_vmap_list.lo lqr_progress.lo
 liblqr_1_la_OBJECTS = $(am_liblqr_1_la_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -104,6 +105,7 @@ CYGPATH_W = @CYGPATH_W@
 DATADIR = @DATADIR@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DSYMUTIL = @DSYMUTIL@
 ECHO = @ECHO@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
@@ -120,6 +122,8 @@ INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
+INSTMAN_FALSE = @INSTMAN_FALSE@
+INSTMAN_TRUE = @INSTMAN_TRUE@
 LDFLAGS = @LDFLAGS@
 LIBOBJS = @LIBOBJS@
 LIBRARY_BASE_NAME = @LIBRARY_BASE_NAME@
@@ -134,6 +138,7 @@ MAINT = @MAINT@
 MAINTAINER_MODE_FALSE = @MAINTAINER_MODE_FALSE@
 MAINTAINER_MODE_TRUE = @MAINTAINER_MODE_TRUE@
 MAKEINFO = @MAKEINFO@
+NMEDIT = @NMEDIT@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
@@ -222,6 +227,10 @@ liblqr_1_la_SOURCES = \
 	lqr_carver_bias.h    \
 	lqr_carver_bias_pub.h    \
 	lqr_carver_bias_priv.h    \
+	lqr_carver_rigmask.c    \
+	lqr_carver_rigmask.h    \
+	lqr_carver_rigmask_pub.h    \
+	lqr_carver_rigmask_priv.h    \
 	lqr_vmap.c \
 	lqr_vmap.h \
 	lqr_vmap_pub.h \
@@ -235,12 +244,14 @@ liblqr_1_la_SOURCES = \
 	lqr_progress_pub.h  \
 	lqr_progress_priv.h
 
-liblqr_1_la_LDFLAGS = -version-info @LTVERSION@ $(GLIB_LIBS) -lm
+liblqr_1_la_LDFLAGS = -version-info @LTVERSION@
+liblqr_1_la_LIBADD = $(GLIB_LIBS) -lm
 AM_CPPFLAGS = \
 	-DDATADIR=\""$(DATADIR)"\"		\
 	-I$(top_srcdir)		\
 	@GLIB_CFLAGS@		\
-	-I$(includedir)
+	-I$(includedir)		\
+	-fvisibility=hidden
 
 lqr_include0_HEADERS = lqr.h
 lqr_include0dir = $(includedir)/@LIBRARY_SNAME@
@@ -250,6 +261,7 @@ lqr_include_HEADERS = lqr_base.h \
 		      lqr_carver_pub.h \
 		      lqr_carver_list_pub.h \
 		      lqr_carver_bias_pub.h    \
+		      lqr_carver_rigmask_pub.h    \
 		      lqr_vmap_pub.h \
 		      lqr_vmap_list_pub.h \
 		      lqr_progress_pub.h
@@ -327,6 +339,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lqr_carver.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lqr_carver_bias.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lqr_carver_list.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lqr_carver_rigmask.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lqr_cursor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lqr_gradient.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lqr_progress.Plo@am__quote@

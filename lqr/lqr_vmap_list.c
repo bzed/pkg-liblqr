@@ -1,5 +1,5 @@
 /* LiquidRescaling Library
- * Copyright (C) 2007 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
+ * Copyright (C) 2007-2008 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
  * All Rights Reserved.
  *
  * This library implements the algorithm described in the paper
@@ -9,7 +9,7 @@
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation; version 3 dated June, 2007.
+ * the Free Software Foundation; version 3 dated June, 2007-2008.
 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -69,12 +69,14 @@ lqr_vmap_list_destroy(LqrVMapList * list)
     }
 }
 
+LQR_PUBLIC
 LqrVMapList *
 lqr_vmap_list_start (LqrCarver *r)
 {
   return r->flushed_vs;
 }
 
+LQR_PUBLIC
 LqrVMapList *
 lqr_vmap_list_next (LqrVMapList * list)
 {
@@ -82,6 +84,7 @@ lqr_vmap_list_next (LqrVMapList * list)
   return list->next;
 }
 
+LQR_PUBLIC
 LqrVMap *
 lqr_vmap_list_current (LqrVMapList * list)
 {
@@ -89,6 +92,7 @@ lqr_vmap_list_current (LqrVMapList * list)
   return list->current;
 }
 
+LQR_PUBLIC
 LqrRetVal
 lqr_vmap_list_foreach (LqrVMapList * list, LqrVMapFunc func, gpointer data)
 {
