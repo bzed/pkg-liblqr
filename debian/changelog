@@ -3,8 +3,13 @@ liblqr (0.2.0-1) unstable; urgency=low
   * New Upstream Version
   * debian/watch:
     - Updating watch file to fit the new filename. 
+  * debian/liblqr-1-0.symbols:
+    - In the last version of the library several symbols were not marked as
+      private by upstream, they are missing now. As the library is new and
+      only used by one Gimp plugin now and the abi did not change for the
+      plugin, there was no soname bump.
 
- -- Bernd Zeimetz <bzed@debian.org>  Fri, 17 Oct 2008 10:49:06 +0200
+ -- Bernd Zeimetz <bzed@debian.org>  Fri, 17 Oct 2008 10:54:44 +0200
 
 liblqr (0.1.0-1) unstable; urgency=low
 
