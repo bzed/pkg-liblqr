@@ -1,5 +1,5 @@
 /* LiquidRescaling Library
- * Copyright (C) 2007 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
+ * Copyright (C) 2007-2008 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
  * All Rights Reserved.
  *
  * This library implements the algorithm described in the paper
@@ -9,7 +9,7 @@
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation; version 3 dated June, 2007.
+ * the Free Software Foundation; version 3 dated June, 2007-2008.
 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -31,13 +31,12 @@
 /*** constructor and destructor ***/
 
 LqrCursor *
-lqr_cursor_create (LqrCarver * owner, gint * vs)
+lqr_cursor_create (LqrCarver * owner)
 {
   LqrCursor *c;
 
   TRY_N_N (c = g_try_new (LqrCursor, 1));
   c->o = owner;
-  c->vs = vs;
   c->eoc = 0;
 #ifdef __LQR_DEBUG__
   c->initialized = 1;
@@ -75,7 +74,7 @@ lqr_cursor_reset (LqrCursor * c)
   c->now = 0;
 
   /* skip invisible points */
-  while ((c->vs[c->now] != 0) && (c->vs[c->now] < c->o->level))
+  while ((c->o->vs[c->now] != 0) && (c->o->vs[c->now] < c->o->level))
     {
       c->now++;
 #ifdef __LQR_DEBUG__
@@ -125,7 +124,7 @@ lqr_cursor_next (LqrCursor * c)
 #endif /* __LQR_DEBUG__ */
 
   /* skip invisible points */
-  while ((c->vs[c->now] != 0) && (c->vs[c->now] < c->o->level))
+  while ((c->o->vs[c->now] != 0) && (c->o->vs[c->now] < c->o->level))
     {
       c->now++;
 #ifdef __LQR_DEBUG__
@@ -170,7 +169,7 @@ lqr_cursor_prev (LqrCursor * c)
 #endif /* __LQR_DEBUG__ */
 
   /* skip invisible points */
-  while ((c->vs[c->now] != 0) && (c->vs[c->now] < c->o->level))
+  while ((c->o->vs[c->now] != 0) && (c->o->vs[c->now] < c->o->level))
     {
       c->now--;
 #ifdef __LQR_DEBUG__
@@ -203,7 +202,7 @@ lqr_cursor_left (LqrCursor * c)
 #endif /* __LQR_DEBUG__ */
 
   /* skip invisible points */
-  while ((c->vs[ret] != 0) && c->vs[ret] < c->o->level)
+  while ((c->o->vs[ret] != 0) && c->o->vs[ret] < c->o->level)
     {
       ret--;
 #ifdef __LQR_DEBUG__

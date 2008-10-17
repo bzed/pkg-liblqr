@@ -1,15 +1,10 @@
 /* LiquidRescaling Library DEMO program
- * Copyright (C) 2007 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
+ * Copyright (C) 2007-2008 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
  * All Rights Reserved.
- *
- * This library implements the algorithm described in the paper
- * "Seam Carving for Content-Aware Image Resizing"
- * by Shai Avidan and Ariel Shamir
- * which can be found at http://www.faculty.idc.ac.il/arik/imret.pdf
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; version 3 dated June, 2007.
+ * the Free Software Foundation; version 3 dated June, 2007-2008.
 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -35,6 +30,8 @@ gchar *disc_infile = NULL;
 gchar *disc_outfile = NULL;
 gchar *vmap_infile = NULL;
 gchar *vmap_outfile = NULL;
+gchar *rigmask_infile = NULL;
+gchar *rigmask_outfile = NULL;
 gint new_width = 0;
 gint new_height = 0;
 gfloat rigidity = 0;
@@ -42,6 +39,7 @@ gint max_step = 1;
 gint pres_strength = 1000;
 gint disc_strength = 1000;
 LqrResizeOrder res_order = LQR_RES_ORDER_HOR;
+gint side_switch_frequency = 0;
 
 gfloat new_width_p = 0;
 gfloat new_height_p = 0;
@@ -172,11 +170,42 @@ main (int argc, char **argv)
 	}
     }
 
+  /*** read and check the rigidity mask ***/
+  pngwriter png_rigmask;
+
+  if (rigmask_infile)
+    {
+      info_msg ("will read rigidity mask from", rigmask_infile);
+      if (rigmask_outfile)
+        {
+	  info_msg ("will write rigidity mask to", rigmask_outfile);
+	  png_pmask.pngwriter_rename(rigmask_outfile);
+	}
+      png_rigmask.readfromfile (rigmask_infile);
+      if (rigmask_outfile)
+        {
+	  if (png_rigmask.getwidth () != old_width)
+	    {
+	      cerr << "Fatal error: rigidity mask width does not match input file width" << endl;
+	      cerr << "cannot honour the --rigmask-out-file option" << endl;
+	      exit (1);
+	    }
+	  if (png_rigmask.getheight () != old_height)
+	    {
+	      cerr << "Fatal error: rigidity mask height does not match input file height" << endl;
+	      cerr << "cannot honour the --rigmask-out-file option" << endl;
+	      exit (1);
+	    }
+	}
+    }
+
+
   /* convert the images into rgb buffers to use them with the library */
 
   guchar *rgb_buffer;
   guchar *rgb_pres_buffer = NULL;
   guchar *rgb_disc_buffer = NULL;
+  guchar *rgb_rigmask_buffer = NULL;
 
   TRAP_N (rgb_buffer = rgb_buffer_from_image (&png));
   if (pres_infile)
@@ -186,6 +215,10 @@ main (int argc, char **argv)
   if (disc_infile)
     {
       TRAP_N (rgb_disc_buffer = rgb_buffer_from_image (&png_dmask));
+    }
+  if (rigmask_infile)
+    {
+      TRAP_N (rgb_rigmask_buffer = rgb_buffer_from_image (&png_rigmask));
     }
 
   if (!quiet)
@@ -222,6 +255,13 @@ main (int argc, char **argv)
       TRAP (lqr_carver_attach(carver, disc_carver));
     }
 
+  LqrCarver *rigmask_carver;
+  if (rigmask_outfile)
+    {
+      TRAP_N (rigmask_carver = lqr_carver_new(rgb_rigmask_buffer, old_width, old_height, 3));
+      TRAP (lqr_carver_attach(carver, rigmask_carver));
+    }
+
   /* (I.3) next step depends on whether we have a pre-computed
    *       map to use or not*/
   if (!vmap_infile)
@@ -241,6 +281,13 @@ main (int argc, char **argv)
 	  TRAP_N (rgb_disc_buffer = rgb_buffer_from_image (&png_dmask));
 	  TRAP (lqr_carver_bias_add_rgb (carver, rgb_disc_buffer, -disc_strength, 3)); 
 	}
+      if (rigmask_infile)
+	{
+	  TRAP_N (rgb_rigmask_buffer = rgb_buffer_from_image (&png_rigmask));
+	  TRAP (lqr_carver_rigmask_add_rgb (carver, rgb_rigmask_buffer, 3)); 
+	}
+      /* (I.3b.3) set the side switch frequency */
+      lqr_carver_set_side_switch_frequency(carver, side_switch_frequency);
     }
   else
     {
@@ -322,8 +369,13 @@ main (int argc, char **argv)
   if (disc_outfile)
     {
       TRAP (write_carver_to_image (lqr_carver_list_current(carver_list), &png_dmask));
+      lqr_carver_list_next(carver_list);
     }
-
+  if (rigmask_outfile)
+    {
+      TRAP (write_carver_to_image (lqr_carver_list_current(carver_list), &png_rigmask));
+    }
+ 
 
 
   /*** close files (write the images on disk) ***/
@@ -336,6 +388,10 @@ main (int argc, char **argv)
   if (disc_outfile)
     {
       png_dmask.close();
+    }
+  if (rigmask_outfile)
+    {
+      png_rigmask.close();
     }
 
 
@@ -361,9 +417,12 @@ LqrRetVal parse_command_line (int argc, char **argv)
     {"disc-file", required_argument, NULL, 'd'},
     {"disc-out-file", required_argument, NULL, 'D'},
     {"disc-strength", required_argument, NULL, 'x'},
+    {"rigmask-file", required_argument, NULL, 'k'},
+    {"rigmask-out-file", required_argument, NULL, 'K'},
     {"vmap-out-file", required_argument, NULL, 'v'},
     {"vmap-in-file", required_argument, NULL, 'V'},
     {"vertical-first", no_argument, NULL, 't'},
+    {"side-switch-frequency", no_argument, NULL, 'n'},
     {"quiet", no_argument, NULL, 'q'},
     {"help", no_argument, NULL, '#'},
     {NULL,0,NULL,0}
@@ -371,7 +430,7 @@ LqrRetVal parse_command_line (int argc, char **argv)
 
 
 
-  while ((c = getopt_long(argc, argv, "f:,o:,w:,h:,r:,s:,p:,P:,z:,d:,D:,x:,v:,V:,tq", lopts, &i)) != EOF) {
+  while ((c = getopt_long(argc, argv, "f:,o:,w:,h:,r:,s:,p:,P:,z:,d:,D:,x:,k:,K:,v:,V:,t,n:,q", lopts, &i)) != EOF) {
     switch (c)
     {
       case 'f':
@@ -426,6 +485,12 @@ LqrRetVal parse_command_line (int argc, char **argv)
       case 'x':
 	disc_strength = atoi (optarg);
 	break;
+      case 'k':
+	rigmask_infile = optarg;
+	break;
+      case 'K':
+	rigmask_outfile = optarg;
+	break;
       case 'v':
 	vmap_infile = optarg;
 	break;
@@ -434,6 +499,9 @@ LqrRetVal parse_command_line (int argc, char **argv)
 	break;
       case 't':
 	res_order = LQR_RES_ORDER_VERT;
+	break;
+      case 'n':
+	side_switch_frequency = atoi(optarg);
 	break;
       case 'q':
 	quiet = 1;
@@ -476,6 +544,13 @@ LqrRetVal parse_command_line (int argc, char **argv)
       cerr << "Option --disc-out-file can't be used without --disc-in-file." << endl;
       return LQR_ERROR;
     }
+
+  if (rigmask_outfile && !rigmask_infile)
+    {
+      cerr << "Option --rigmask-out-file can't be used without --rigmask-in-file." << endl;
+      return LQR_ERROR;
+    }
+
 
   if (pres_strength < 0)
     {
@@ -549,6 +624,8 @@ void help(char *command)
   cout << "        Writes the visibility map in the specified file. Currently, only the first one." << endl;
   cout << "    -t or --vertical-first" << endl;
   cout << "        Rescale vertically first (instead of horizontally)." << endl;
+  cout << "    -n <frequency> or --side-switch-frequency <frequency>" << endl;
+  cout << "        Set the number of switches of the side choice for each size modification." << endl;
   cout << "    -q or --quiet" << endl;
   cout << "        Quiet mode." << endl;
   cout << "    --help" << endl;
@@ -562,17 +639,17 @@ void help(char *command)
 guchar *
 rgb_buffer_from_image (pngwriter * png)
 {/*{{{*/
-  gint x, y, k, bpp;
+  gint x, y, k, channels;
   gint w, h;
   guchar *buffer;
 
   /* get info from the image */
   w = png->getwidth ();
   h = png->getheight ();
-  bpp = 3;                      // we assume an RGB image here 
+  channels = 3;                      // we assume an RGB image here 
 
-  /* allocate memory to store w * h * bpp unsigned chars */
-  buffer = g_try_new (guchar, bpp * w * h);
+  /* allocate memory to store w * h * channels unsigned chars */
+  buffer = g_try_new (guchar, channels * w * h);
   g_assert (buffer != NULL);
 
   /* start iteration (always y first, then x, then colours) */
@@ -580,10 +657,10 @@ rgb_buffer_from_image (pngwriter * png)
     {
       for (x = 0; x < w; x++)
         {
-          for (k = 0; k < bpp; k++)
+          for (k = 0; k < channels; k++)
             {
               /* read the image channel k at position x,y */
-              buffer[(y * w + x) * bpp + k] =
+              buffer[(y * w + x) * channels + k] =
                 (guchar) (png->dread (x + 1, y + 1, k + 1) * 255);
               /* note : the x+1,y+1,k+1 on the right side are
                *        specific the pngwriter library */
@@ -604,11 +681,10 @@ write_carver_to_image (LqrCarver * r, pngwriter * png)
   gint w, h;
 
   /* make sure the image is RGB */
-  CATCH_F (lqr_carver_get_bpp(r) == 3);
+  CATCH_F (lqr_carver_get_channels(r) == 3);
 
   /* resize the image canvas as needed to
-   * fit for the new size
-   * (remember it may be transposed) */
+   * fit for the new size */
   w = lqr_carver_get_width (r);
   h = lqr_carver_get_height (r);
   png->resize (w, h);
@@ -616,7 +692,7 @@ write_carver_to_image (LqrCarver * r, pngwriter * png)
   /* initialize image reading */
   lqr_carver_scan_reset (r);
 
-  /* readout (no nedd to init rgb) */
+  /* readout (no need to init rgb) */
   while (lqr_carver_scan(r, &x, &y, &rgb))
     {
       /* convert the output into doubles */

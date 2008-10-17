@@ -1,5 +1,5 @@
 /* LiquidRescaling Library
- * Copyright (C) 2007 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
+ * Copyright (C) 2007-2008 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
  * All Rights Reserved.
  *
  * This library implements the algorithm described in the paper
@@ -9,7 +9,7 @@
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation; version 3 dated June, 2007.
+ * the Free Software Foundation; version 3 dated June, 2007-2008.
 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -39,14 +39,13 @@ struct _LqrCursor
   gint y;                       /* y coordinate of current data */
   gint now;                     /* current array position */
   LqrCarver *o;                 /* pointer to owner carver */
-  gint *vs;                     /* pointer to owner's visibility map */
   gchar eoc;			/* end of carver flag */
 };
 
 /* LQR_CURSOR CLASS PRIVATE FUNCTIONS */
 
 /* constructor */
-LqrCursor *lqr_cursor_create (LqrCarver * owner, gint * vs);
+LqrCursor * lqr_cursor_create (LqrCarver * owner);
 
 /* destructor */
 void lqr_cursor_destroy (LqrCursor * c);

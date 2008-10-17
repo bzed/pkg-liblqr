@@ -1,5 +1,5 @@
 /* LiquidRescaling Library
- * Copyright (C) 2007 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
+ * Copyright (C) 2007-2008 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
  * All Rights Reserved.
  *
  * This library implements the algorithm described in the paper
@@ -9,7 +9,7 @@
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation; version 3 dated June, 2007.
+ * the Free Software Foundation; version 3 dated June, 2007-2008.
 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -25,6 +25,8 @@
 #define __LQR_BASE_H__
 
 #define LQR_MAX_NAME_LENGTH (1024)
+
+#define LQR_PUBLIC __attribute__((visibility("default")))
 
 #define TRY_N_N(assign) if ((assign) == NULL) { return NULL; }
 //#define TRY_N_F(assign) if ((assign) == NULL) { return FALSE; }
@@ -77,6 +79,22 @@ typedef enum _LqrRetVal LqrRetVal;
 } G_STMT_END
 
 
+/**** IMAGE DEPTH ****/
+enum _LqrColDepth
+{
+  LQR_COLDEPTH_8I,
+  LQR_COLDEPTH_16I,
+  LQR_COLDEPTH_32F,
+  LQR_COLDEPTH_64F,
+};
+
+typedef enum _LqrColDepth LqrColDepth;
+
+/**** IMAGE BASE TYPES ****/
+typedef guchar lqr_t_8i;
+typedef gint16 lqr_t_16i;
+typedef gfloat lqr_t_32f;
+typedef gdouble lqr_t_64f;
 
 /**** RESIZE ORDER ****/
 enum _LqrResizeOrder

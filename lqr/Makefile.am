@@ -28,6 +28,10 @@ liblqr_1_la_SOURCES = \
 	lqr_carver_bias.h    \
 	lqr_carver_bias_pub.h    \
 	lqr_carver_bias_priv.h    \
+	lqr_carver_rigmask.c    \
+	lqr_carver_rigmask.h    \
+	lqr_carver_rigmask_pub.h    \
+	lqr_carver_rigmask_priv.h    \
 	lqr_vmap.c \
 	lqr_vmap.h \
 	lqr_vmap_pub.h \
@@ -41,13 +45,15 @@ liblqr_1_la_SOURCES = \
 	lqr_progress_pub.h  \
 	lqr_progress_priv.h
 
-liblqr_1_la_LDFLAGS = -version-info @LTVERSION@ $(GLIB_LIBS) -lm
+liblqr_1_la_LDFLAGS = -version-info @LTVERSION@
+liblqr_1_la_LIBADD = $(GLIB_LIBS) -lm
 
 AM_CPPFLAGS = \
 	-DDATADIR=\""$(DATADIR)"\"		\
 	-I$(top_srcdir)		\
 	@GLIB_CFLAGS@		\
-	-I$(includedir)
+	-I$(includedir)		\
+	-fvisibility=hidden
 
 lqr_include0_HEADERS = lqr.h
 
@@ -59,6 +65,7 @@ lqr_include_HEADERS = lqr_base.h \
 		      lqr_carver_pub.h \
 		      lqr_carver_list_pub.h \
 		      lqr_carver_bias_pub.h    \
+		      lqr_carver_rigmask_pub.h    \
 		      lqr_vmap_pub.h \
 		      lqr_vmap_list_pub.h \
 		      lqr_progress_pub.h
