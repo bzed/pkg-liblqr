@@ -1,9 +1,9 @@
 Source: liblqr
 Priority: optional
 Maintainer: Bernd Zeimetz <bzed@debian.org>
-Uploaders: Sandro Tosi <matrixhasu@gmail.com>
+Uploaders: Sandro Tosi <morph@debian.org>
 Build-Depends: debhelper (>= 5.0.62), autotools-dev, xsltproc, docbook-xsl, docbook-xml, pkg-config, libglib2.0-dev (>= 2.0.0)
-Standards-Version: 3.7.3
+Standards-Version: 3.8.0
 Section: libs
 Homepage: http://liblqr.wikidot.com/
 Vcs-Browser: http://git.recluse.de/?p=debian/pkg-liblqr.git;a=summary
