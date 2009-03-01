@@ -20,7 +20,12 @@ liblqr-1.so.0 liblqr-1-0 #MINVER#
  lqr_carver_get_bpp@Base 0.1.0
  lqr_carver_get_channels@Base 0.2.0
  lqr_carver_get_col_depth@Base 0.2.0
+ lqr_carver_get_depth@Base 0.3.0-1
+ lqr_carver_get_enl_step@Base 0.3.0-1
  lqr_carver_get_height@Base 0.1.0
+ lqr_carver_get_orientation@Base 0.3.0-1
+ lqr_carver_get_ref_height@Base 0.3.0-1
+ lqr_carver_get_ref_width@Base 0.3.0-1
  lqr_carver_get_width@Base 0.1.0
 #MISSING: 0.2.0# lqr_carver_inflate1@Base 0.1.0
 #MISSING: 0.2.0# lqr_carver_inflate@Base 0.1.0
@@ -48,6 +53,7 @@ liblqr-1.so.0 liblqr-1-0 #MINVER#
  lqr_carver_scan_line_ext@Base 0.2.0
  lqr_carver_scan_reset@Base 0.1.0
  lqr_carver_set_dump_vmaps@Base 0.1.0
+ lqr_carver_set_enl_step@Base 0.3.0-1
  lqr_carver_set_gradient_function@Base 0.1.0
  lqr_carver_set_no_dump_vmaps@Base 0.2.0
  lqr_carver_set_progress@Base 0.1.0
