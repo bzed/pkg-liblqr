@@ -1,5 +1,5 @@
 /* LiquidRescaling Library
- * Copyright (C) 2007-2008 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
+ * Copyright (C) 2007-2009 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
  * All Rights Reserved.
  *
  * This library implements the algorithm described in the paper
@@ -9,7 +9,7 @@
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation; version 3 dated June, 2007-2008.
+ * the Free Software Foundation; version 3 dated June, 2007.
 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -26,6 +26,14 @@
 #ifndef __LQR_BASE_H__
 #error "lqr_base.h must be included prior to lqr_carver_list_priv.h"
 #endif /* __LQR_BASE_H__ */
+
+/**** LQR_CARVER_LIST CLASS DEFINITION ****/
+
+struct _LqrCarverList
+{
+  LqrCarver * current;
+  LqrCarverList * next;
+};
 
 /* LQR_CARVER_LIST PRIVATE FUNCTIONS */
 

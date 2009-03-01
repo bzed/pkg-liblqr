@@ -10,7 +10,12 @@ dist_man_MANS = \
 	lqr_carver_get_bpp.3 \
 	lqr_carver_get_channels.3 \
 	lqr_carver_get_col_depth.3 \
+	lqr_carver_get_depth.3 \
+	lqr_carver_get_enl_step.3 \
 	lqr_carver_get_height.3 \
+	lqr_carver_get_orientation.3 \
+	lqr_carver_get_ref_height.3 \
+	lqr_carver_get_ref_width.3 \
 	lqr_carver_get_width.3 \
 	lqr_carver_init.3 \
 	lqr_carver_list_current.3 \
@@ -31,6 +36,7 @@ dist_man_MANS = \
 	lqr_carver_scan_line_ext.3 \
 	lqr_carver_scan_reset.3 \
 	lqr_carver_set_dump_vmaps.3 \
+	lqr_carver_set_enl_step.3 \
 	lqr_carver_set_gradient_function.3 \
 	lqr_carver_set_no_dump_vmaps.3 \
 	lqr_carver_set_progress.3 \

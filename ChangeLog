@@ -1,3 +1,23 @@
+2009-01-26  Carlo Baldassi  <carlobaldassi@gmail.com>
+
+	* Added readouts for current visiblity map
+
+2008-11-01  Carlo Baldassi  <carlobaldassi@gmail.com>
+
+	* Bugfix in update_mmap causing crashes with
+	  delta_x > 1
+	* Removed unnecessary includes of stdio.h
+	* Added debug_checkrows
+
+2008-10-22  Carlo Baldassi  <carlobaldassi@gmail.com>
+
+	* Moved classes definitions to private headers
+
+2008-10-21  Carlo Baldassi  <carlobaldassi@gmail.com>
+
+	* Removed 2-fold scale-up limit, added
+	  enl_step setting
+
 2008-10-12  Carlo Baldassi  <carlobaldassi@gmail.com>
 
 	* Added 32 bit and 64 bit floating point support
