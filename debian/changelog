@@ -1,3 +1,13 @@
+liblqr (0.2.0-2) unstable; urgency=low
+
+  * debian/control
+    - updated my email address
+    - bump Standards-Version to 3.8.0 (no changes needed)
+  * debian/watch
+    - updated to match new upstream tarball name
+
+ -- Sandro Tosi <morph@debian.org>  Tue, 30 Dec 2008 15:40:03 +0100
+
 liblqr (0.2.0-1) unstable; urgency=low
 
   * New Upstream Version
