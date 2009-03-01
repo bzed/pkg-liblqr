@@ -1,5 +1,5 @@
 /* LiquidRescaling Library
- * Copyright (C) 2007-2008 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
+ * Copyright (C) 2007-2009 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
  * All Rights Reserved.
  *
  * This library implements the algorithm described in the paper
@@ -9,7 +9,7 @@
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation; version 3 dated June, 2007-2008.
+ * the Free Software Foundation; version 3 dated June, 2007.
 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -19,8 +19,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/> 
  */
-
-#include <stdio.h>
 
 #include <lqr/lqr_all.h>
 
@@ -257,6 +255,8 @@ lqr_vmap_load (LqrCarver *r, LqrVMap *vmap)
   CATCH (lqr_carver_inflate(r, vmap->depth));
 
   lqr_cursor_reset (r->c);
+
+  lqr_carver_set_enl_step(r, 2.0);
 
   return LQR_OK;
 }

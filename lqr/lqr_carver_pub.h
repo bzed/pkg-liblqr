@@ -1,5 +1,5 @@
 /* LiquidRescaling Library
- * Copyright (C) 2007-2008 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
+ * Copyright (C) 2007-2009 Carlo Baldassi (the "Author") <carlobaldassi@gmail.com>.
  * All Rights Reserved.
  *
  * This library implements the algorithm described in the paper
@@ -9,7 +9,7 @@
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation; version 3 dated June, 2007-2008.
+ * the Free Software Foundation; version 3 dated June, 2007.
 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -47,65 +47,6 @@
 #error "lqr_progress_pub.h must be included prior to lqr_carver_pub.h"
 #endif /* __LQR_PROGRESS_PUB_H__ */
 
-/**** LQR_CARVER CLASS DEFINITION ****/
-/* This is the representation of the multisize image */
-struct _LqrCarver
-{
-  gint w_start, h_start;        /* original width & height */
-  gint w, h;                    /* current width & height */
-  gint w0, h0;                  /* map array width & height */
-
-  gint level;                   /* (in)visibility level (1 = full visibility) */
-  gint max_level;               /* max level computed so far
-                                 * it is not level <= max_level
-                                 * but rather level <= 2 * max_level - 1
-                                 * since levels are shifted upon inflation
-                                 */
-
-  gint channels;                /* number of colour channels of the image */
-  LqrColDepth col_depth;	/* image colour depth */
-
-  gint transposed;              /* flag to set transposed state */
-  gboolean active;              /* flag to set if carver is active */
-  LqrCarver* root;              /* pointer to the root carver */
-
-  gboolean resize_aux_layers;   /* flag to determine whether the auxiliary layers are resized */
-  gboolean dump_vmaps;         /* flag to determine whether to output the seam map */
-  LqrResizeOrder resize_order;  /* resize order */
-
-  LqrCarverList *attached_list; /* list of attached carvers */
-
-  gfloat rigidity;              /* rigidity value (can straighten seams) */
-  gfloat *rigidity_map;        /* the rigidity function */
-  gfloat *rigidity_mask;	/* the rigidity mask */
-  gint delta_x;                 /* max displacement of seams (currently is only meaningful if 0 or 1 */
-
-  void *rgb;                    /* array of rgb points */
-  gint *vs;                     /* array of visibility levels */
-  gfloat *en;                  /* array of energy levels */
-  gfloat *bias;                /* bias mask */
-  gfloat *m;                   /* array of auxiliary energy values */
-  gint *least;                  /* array of pointers */
-  gint *_raw;                   /* array of array-coordinates, for seam computation */
-  gint **raw;                   /* array of array-coordinates, for seam computation */
-
-  LqrCursor *c;                 /* cursor to be used as image reader */
-  void *rgb_ro_buffer;	        /* readout buffer */
-
-  gint *vpath;                  /* array of array-coordinates representing a vertical seam */
-  gint *vpath_x;                /* array of abscisses representing a vertical seam */
-
-  LqrGradFunc gf;                    /* pointer to a gradient function */
-
-  gint leftright;		/* whether to favor left or right seams */
-  gint lr_switch_frequency;	/* interval between leftright switches */
-
-  LqrProgress * progress;	/* pointer to progress update functions */
-
-  LqrVMapList * flushed_vs;  /* linked list of pointers to flushed visibility maps buffers */
-
-};
-
 
 /* LQR_CARVER CLASS PUBLIC FUNCTIONS */
 
@@ -123,6 +64,7 @@ void lqr_carver_set_dump_vmaps (LqrCarver *r);
 void lqr_carver_set_no_dump_vmaps (LqrCarver *r);
 void lqr_carver_set_resize_order (LqrCarver *r, LqrResizeOrder resize_order);
 void lqr_carver_set_side_switch_frequency (LqrCarver *r, guint switch_frequency);
+LqrRetVal lqr_carver_set_enl_step (LqrCarver *r, gfloat enl_step);
 LqrRetVal lqr_carver_attach (LqrCarver * r, LqrCarver * aux);
 void lqr_carver_set_progress (LqrCarver *r, LqrProgress *p);
 
@@ -141,7 +83,12 @@ gint lqr_carver_get_bpp (LqrCarver *r);
 gint lqr_carver_get_channels (LqrCarver *r);
 gint lqr_carver_get_width (LqrCarver * r);
 gint lqr_carver_get_height (LqrCarver * r);
+gint lqr_carver_get_ref_width (LqrCarver * r);
+gint lqr_carver_get_ref_height (LqrCarver * r);
+gint lqr_carver_get_orientation (LqrCarver * r);
 LqrColDepth lqr_carver_get_col_depth (LqrCarver * r);
+gfloat lqr_carver_get_enl_step (LqrCarver *r);
+gint lqr_carver_get_depth (LqrCarver *r);
 
 
 #endif /* __LQR_CARVER_PUB_H__ */
