@@ -9,6 +9,13 @@ liblqr (0.3.0-1) unstable; urgency=low
 
   [ Bernd Zeimetz ]
   * New upstream version.
+  * debian/liblqr-1-0.symbols:
+    - Updating symbols file to match the symbols in the updated library.
+  * debian/copyright:
+    - Linking to GPL-3 and adding 'Copyright' for the Debian packaging
+      to make lintian happy.
+  * debian/control:
+    - Removing duplicate section entry.
 
  -- Bernd Zeimetz <bzed@debian.org>  Sun, 01 Mar 2009 02:14:40 +0100
 
