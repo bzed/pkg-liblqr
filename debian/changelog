@@ -1,3 +1,13 @@
+liblqr (0.3.1-1) unstable; urgency=low
+
+  * New Upstream Version
+    This is a bugfix release. It fixes a serious bug with 16bit images
+    (therefore, it is actually irrelevant to GIMP users, not so for other
+    programs such as ImageMagick and DigiKam). 
+  * debian/rules: Be pendantic about symbol changes 
+
+ -- Bernd Zeimetz <bzed@debian.org>  Wed, 08 Apr 2009 01:41:43 +0200
+
 liblqr (0.3.0-1) unstable; urgency=low
 
   [ Sandro Tosi ]
