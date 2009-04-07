@@ -96,7 +96,7 @@ binary-arch: build install
 	dh_compress
 	dh_fixperms
 	# needed to create shlibs file
-	dh_makeshlibs
+	dh_makeshlibs -- -c4
 	dh_installdeb
 	dh_shlibdeps		-Lliblqr-1-0 -l$(CURDIR)/debian/$(PACKAGE)/usr/lib
 	dh_gencontrol
