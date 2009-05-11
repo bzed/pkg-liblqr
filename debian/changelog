@@ -1,3 +1,11 @@
+liblqr (0.4.0-1) unstable; urgency=low
+
+  * [6ca66abd] Sanity check for the right soname in debian/rules.
+  * [a9be65c1] Imported Upstream version 0.4.0
+  * [553e2ae0] Updating symbols file.
+
+ -- Bernd Zeimetz <bzed@debian.org>  Mon, 11 May 2009 17:32:33 +0200
+
 liblqr (0.3.1-1) unstable; urgency=low
 
   * New Upstream Version
