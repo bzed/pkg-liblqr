@@ -18,14 +18,16 @@ else
 CROSS= --build $(DEB_BUILD_GNU_TYPE)
 endif
 
-# shared library versions, option 1
-version=2.0.5
-major=2
-# option 2, assuming the library is created as src/.libs/libfoo.so.2.0.5 or so
-#version=`ls src/.libs/lib*.so.* | \
-# awk '{if (match($$0,/[0-9]+\.[0-9]+\.[0-9]+$$/)) print substr($$0,RSTART)}'`
-#major=`ls src/.libs/lib*.so.* | \
-# awk '{if (match($$0,/\.so\.[0-9]+$$/)) print substr($$0,RSTART+4)}'`
+#library versions
+LIB_version_number := $(shell grep '^libgps_la_LDFLAGS' Makefile.am | sed 's,.*-version-number ,,')
+LIB_version_number := $(shell grep LTVERSION= configure | sed 's,.*LTVERSION=,,g')
+LIB_version_current := $(shell echo $(LIB_version_number) | awk -F : '{print $$1}')
+LIB_version_revision := $(shell echo $(LIB_version_number) | awk -F : '{print $$2}')
+LIB_version_age := $(shell echo $(LIB_version_number) | awk -F : '{print $$3}')
+LIB_soname := $(shell expr $(LIB_version_current) - $(LIB_version_age))
+LIB_version := $(LIB_soname).$(LIB_version_age).$(LIB_version_revision)
+
+
 
 config.status: configure
 	dh_testdir
@@ -45,6 +47,9 @@ endif
 build: build-stamp
 build-stamp: config.status 
 	dh_testdir
+
+	#sanity check to ensure we have the right soname in debian/control
+	grep liblqr-1-$(LIB_soname) debian/control
 
 	# Add here commands to compile the package.
 	$(MAKE)
