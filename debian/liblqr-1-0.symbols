@@ -4,11 +4,14 @@ liblqr-1.so.0 liblqr-1-0 #MINVER#
  lqr_carver_bias_add_area@Base 0.1.0
  lqr_carver_bias_add_rgb@Base 0.1.0
  lqr_carver_bias_add_rgb_area@Base 0.1.0
+ lqr_carver_bias_add_xy@Base 0.4.0
+ lqr_carver_bias_clear@Base 0.4.0
 #MISSING: 0.2.0# lqr_carver_build_emap@Base 0.1.0
 #MISSING: 0.2.0# lqr_carver_build_maps@Base 0.1.0
 #MISSING: 0.2.0# lqr_carver_build_mmap@Base 0.1.0
 #MISSING: 0.2.0# lqr_carver_build_vpath@Base 0.1.0
 #MISSING: 0.2.0# lqr_carver_build_vsmap@Base 0.1.0
+ lqr_carver_cancel@Base 0.4.0
 #MISSING: 0.2.0# lqr_carver_carve@Base 0.1.0
 #MISSING: 0.2.0# lqr_carver_compute_e@Base 0.1.0
 #MISSING: 0.2.0# lqr_carver_copy_vsmap1@Base 0.1.0
@@ -21,11 +24,15 @@ liblqr-1.so.0 liblqr-1-0 #MINVER#
  lqr_carver_get_channels@Base 0.2.0
  lqr_carver_get_col_depth@Base 0.2.0
  lqr_carver_get_depth@Base 0.3.0
+ lqr_carver_get_energy@Base 0.4.0
+ lqr_carver_get_energy_image@Base 0.4.0
  lqr_carver_get_enl_step@Base 0.3.0
  lqr_carver_get_height@Base 0.1.0
+ lqr_carver_get_image_type@Base 0.4.0
  lqr_carver_get_orientation@Base 0.3.0
  lqr_carver_get_ref_height@Base 0.3.0
  lqr_carver_get_ref_width@Base 0.3.0
+ lqr_carver_get_true_energy@Base 0.4.0
  lqr_carver_get_width@Base 0.1.0
 #MISSING: 0.2.0# lqr_carver_inflate1@Base 0.1.0
 #MISSING: 0.2.0# lqr_carver_inflate@Base 0.1.0
@@ -34,6 +41,7 @@ liblqr-1.so.0 liblqr-1-0 #MINVER#
  lqr_carver_list_current@Base 0.1.0
 #MISSING: 0.2.0# lqr_carver_list_destroy@Base 0.1.0
  lqr_carver_list_foreach@Base 0.1.0
+ lqr_carver_list_foreach_recursive@Base 0.4.0
  lqr_carver_list_next@Base 0.1.0
  lqr_carver_list_start@Base 0.1.0
  lqr_carver_new@Base 0.1.0
@@ -46,19 +54,28 @@ liblqr-1.so.0 liblqr-1-0 #MINVER#
  lqr_carver_rigmask_add_area@Base 0.2.0
  lqr_carver_rigmask_add_rgb@Base 0.2.0
  lqr_carver_rigmask_add_rgb_area@Base 0.2.0
+ lqr_carver_rigmask_add_xy@Base 0.4.0
+ lqr_carver_rigmask_clear@Base 0.4.0
  lqr_carver_scan@Base 0.1.0
  lqr_carver_scan_by_row@Base 0.1.0
  lqr_carver_scan_ext@Base 0.2.0
  lqr_carver_scan_line@Base 0.1.0
  lqr_carver_scan_line_ext@Base 0.2.0
  lqr_carver_scan_reset@Base 0.1.0
+ lqr_carver_set_alpha_channel@Base 0.4.0
+ lqr_carver_set_black_channel@Base 0.4.0
  lqr_carver_set_dump_vmaps@Base 0.1.0
+ lqr_carver_set_energy_function@Base 0.4.0
+ lqr_carver_set_energy_function_builtin@Base 0.4.0
  lqr_carver_set_enl_step@Base 0.3.0
  lqr_carver_set_gradient_function@Base 0.1.0
+ lqr_carver_set_image_type@Base 0.4.0
  lqr_carver_set_no_dump_vmaps@Base 0.2.0
+ lqr_carver_set_preserve_input_image@Base 0.4.0
  lqr_carver_set_progress@Base 0.1.0
  lqr_carver_set_resize_order@Base 0.1.0
  lqr_carver_set_side_switch_frequency@Base 0.2.0
+ lqr_carver_set_use_cache@Base 0.4.0
 #MISSING: 0.2.0# lqr_carver_set_width1@Base 0.1.0
 #MISSING: 0.2.0# lqr_carver_set_width@Base 0.1.0
 #MISSING: 0.2.0# lqr_carver_transpose1@Base 0.1.0
@@ -90,6 +107,10 @@ liblqr-1.so.0 liblqr-1-0 #MINVER#
  lqr_progress_set_update@Base 0.1.0
  lqr_progress_set_update_step@Base 0.1.0
 #MISSING: 0.2.0# lqr_progress_update@Base 0.1.0
+ lqr_rwindow_get_channels@Base 0.4.0
+ lqr_rwindow_get_radius@Base 0.4.0
+ lqr_rwindow_get_read_t@Base 0.4.0
+ lqr_rwindow_read@Base 0.4.0
  lqr_vmap_destroy@Base 0.1.0
  lqr_vmap_dump@Base 0.1.0
  lqr_vmap_get_data@Base 0.1.0
