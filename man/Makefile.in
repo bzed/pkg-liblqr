@@ -39,10 +39,7 @@ subdir = man
 DIST_COMMON = $(dist_man_MANS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
-	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
-	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
-	$(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -61,6 +58,7 @@ AMDEP_TRUE = @AMDEP_TRUE@
 AMTAR = @AMTAR@
 API_VERSION = @API_VERSION@
 AR = @AR@
+AS = @AS@
 AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
@@ -70,10 +68,15 @@ CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
+CXX = @CXX@
+CXXCPP = @CXXCPP@
+CXXDEPMODE = @CXXDEPMODE@
+CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DATADIR = @DATADIR@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
@@ -82,6 +85,7 @@ ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
+FVISIBILITY_FLAG = @FVISIBILITY_FLAG@
 GLIB_CFLAGS = @GLIB_CFLAGS@
 GLIB_DIR = @GLIB_DIR@
 GLIB_LIBS = @GLIB_LIBS@
@@ -104,12 +108,14 @@ LIPO = @LIPO@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 LTVERSION = @LTVERSION@
+LT_NOUNDEF_FLAG = @LT_NOUNDEF_FLAG@
 MAINT = @MAINT@
 MAINTAINER_MODE_FALSE = @MAINTAINER_MODE_FALSE@
 MAINTAINER_MODE_TRUE = @MAINTAINER_MODE_TRUE@
 MAKEINFO = @MAKEINFO@
 NM = @NM@
 NMEDIT = @NMEDIT@
+OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 OTOOL = @OTOOL@
 OTOOL64 = @OTOOL64@
@@ -128,9 +134,12 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 VERSION = @VERSION@
 ac_ct_CC = @ac_ct_CC@
+ac_ct_CXX = @ac_ct_CXX@
 ac_ct_DUMPBIN = @ac_ct_DUMPBIN@
 am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
 am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
+am__fastdepCXX_FALSE = @am__fastdepCXX_FALSE@
+am__fastdepCXX_TRUE = @am__fastdepCXX_TRUE@
 am__include = @am__include@
 am__leading_dot = @am__leading_dot@
 am__quote = @am__quote@
@@ -178,17 +187,26 @@ target_alias = @target_alias@
 @INSTMAN_TRUE@	lqr_carver_bias_add_area.3 \
 @INSTMAN_TRUE@	lqr_carver_bias_add_rgb.3 \
 @INSTMAN_TRUE@	lqr_carver_bias_add_rgb_area.3 \
+@INSTMAN_TRUE@	lqr_carver_bias_add_xy.3 \
+@INSTMAN_TRUE@	lqr_carver_bias_clear.3 \
+@INSTMAN_TRUE@	lqr_carver_bias_set_energy_function.3 \
+@INSTMAN_TRUE@	lqr_carver_bias_set_energy_function_builtin.3 \
+@INSTMAN_TRUE@	lqr_carver_cancel.3 \
 @INSTMAN_TRUE@	lqr_carver_destroy.3 \
 @INSTMAN_TRUE@	lqr_carver_flatten.3 \
 @INSTMAN_TRUE@	lqr_carver_get_bpp.3 \
 @INSTMAN_TRUE@	lqr_carver_get_channels.3 \
 @INSTMAN_TRUE@	lqr_carver_get_col_depth.3 \
 @INSTMAN_TRUE@	lqr_carver_get_depth.3 \
+@INSTMAN_TRUE@	lqr_carver_get_energy.3 \
+@INSTMAN_TRUE@	lqr_carver_get_energy_image.3 \
 @INSTMAN_TRUE@	lqr_carver_get_enl_step.3 \
 @INSTMAN_TRUE@	lqr_carver_get_height.3 \
+@INSTMAN_TRUE@	lqr_carver_get_image_type.3 \
 @INSTMAN_TRUE@	lqr_carver_get_orientation.3 \
 @INSTMAN_TRUE@	lqr_carver_get_ref_height.3 \
 @INSTMAN_TRUE@	lqr_carver_get_ref_width.3 \
+@INSTMAN_TRUE@	lqr_carver_get_true_energy.3 \
 @INSTMAN_TRUE@	lqr_carver_get_width.3 \
 @INSTMAN_TRUE@	lqr_carver_init.3 \
 @INSTMAN_TRUE@	lqr_carver_list_current.3 \
@@ -202,20 +220,28 @@ target_alias = @target_alias@
 @INSTMAN_TRUE@	lqr_carver_rigmask_add_area.3 \
 @INSTMAN_TRUE@	lqr_carver_rigmask_add_rgb.3 \
 @INSTMAN_TRUE@	lqr_carver_rigmask_add_rgb_area.3 \
+@INSTMAN_TRUE@	lqr_carver_rigmask_add_xy.3 \
+@INSTMAN_TRUE@	lqr_carver_rigmask_clear.3 \
 @INSTMAN_TRUE@	lqr_carver_scan.3 \
 @INSTMAN_TRUE@	lqr_carver_scan_by_row.3 \
 @INSTMAN_TRUE@	lqr_carver_scan_ext.3 \
 @INSTMAN_TRUE@	lqr_carver_scan_line.3 \
 @INSTMAN_TRUE@	lqr_carver_scan_line_ext.3 \
 @INSTMAN_TRUE@	lqr_carver_scan_reset.3 \
+@INSTMAN_TRUE@	lqr_carver_set_alpha_channel.3 \
+@INSTMAN_TRUE@	lqr_carver_set_black_channel.3 \
 @INSTMAN_TRUE@	lqr_carver_set_dump_vmaps.3 \
 @INSTMAN_TRUE@	lqr_carver_set_enl_step.3 \
 @INSTMAN_TRUE@	lqr_carver_set_gradient_function.3 \
+@INSTMAN_TRUE@	lqr_carver_set_image_type.3 \
 @INSTMAN_TRUE@	lqr_carver_set_no_dump_vmaps.3 \
+@INSTMAN_TRUE@	lqr_carver_set_preserve_input_image.3 \
 @INSTMAN_TRUE@	lqr_carver_set_progress.3 \
 @INSTMAN_TRUE@	lqr_carver_set_resize_order.3 \
 @INSTMAN_TRUE@	lqr_carver_set_side_switch_frequency.3 \
+@INSTMAN_TRUE@	lqr_carver_set_use_cache.3 \
 @INSTMAN_TRUE@	LqrColDepth.3 \
+@INSTMAN_TRUE@	LqrImageType.3 \
 @INSTMAN_TRUE@	lqr_progress_new.3 \
 @INSTMAN_TRUE@	lqr_progress_set_end.3 \
 @INSTMAN_TRUE@	lqr_progress_set_end_height_message.3 \
@@ -226,6 +252,10 @@ target_alias = @target_alias@
 @INSTMAN_TRUE@	lqr_progress_set_update.3 \
 @INSTMAN_TRUE@	lqr_progress_set_update_step.3 \
 @INSTMAN_TRUE@	LqrRetVal.3 \
+@INSTMAN_TRUE@	lqr_rwindow_get_channels.3 \
+@INSTMAN_TRUE@	lqr_rwindow_get_radius.3 \
+@INSTMAN_TRUE@	lqr_rwindow_get_read_t.3 \
+@INSTMAN_TRUE@	lqr_rwindow_read.3 \
 @INSTMAN_TRUE@	lqr_vmap_destroy.3 \
 @INSTMAN_TRUE@	lqr_vmap_dump.3 \
 @INSTMAN_TRUE@	lqr_vmap_get_data.3 \

@@ -15,9 +15,9 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- 
+
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program; if not, see <http://www.gnu.org/licenses/> 
+ * along with this program; if not, see <http://www.gnu.org/licenses/>
  */
 
 #ifndef __LQR_CARVER_RIGMASK_PRIV_H__
@@ -27,7 +27,6 @@
 #error "lqr_base.h must be included prior to lqr_carver_rigmask_priv.h"
 #endif /* __LQR_BASE_H__ */
 
-
-LqrRetVal lqr_carver_rigmask_init (LqrCarver *r);
+LqrRetVal lqr_carver_rigmask_init(LqrCarver *r);
 
 #endif /* __LQR_CARVER_RIGMASK_PRIV_H__ */

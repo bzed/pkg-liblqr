@@ -36,6 +36,15 @@
 /* Library name */
 #undef LIBRARY_NAME
 
+/* Disable __declspec directives */
+#undef LQR_DISABLE_DECLSPEC
+
+/* Disable legacy macros */
+#undef LQR_DISABLE_LEGACY_MACROS
+
+/* Flag for Windows DLL creation */
+#undef LQR_EXPORTS
+
 /* Library age */
 #undef LTVERSION_AGE
 
@@ -81,3 +90,13 @@
 
 /* Version number of package */
 #undef VERSION
+
+/* Define to `__inline__' or `__inline' if that's what the C compiler
+   calls it, or to nothing if 'inline' is not supported under any name.  */
+#ifndef __cplusplus
+#undef inline
+#endif
+
+/* Define to empty if the keyword `volatile' does not work. Warning: valid
+   code using `volatile' can become incorrect without. Disable with care. */
+#undef volatile

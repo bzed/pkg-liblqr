@@ -12,6 +12,14 @@ liblqr_1_la_SOURCES = \
 	lqr_gradient.h  \
 	lqr_gradient_pub.h  \
 	lqr_gradient_priv.h  \
+	lqr_rwindow.c  \
+	lqr_rwindow.h  \
+	lqr_rwindow_pub.h  \
+	lqr_rwindow_priv.h  \
+	lqr_energy.c  \
+	lqr_energy.h  \
+	lqr_energy_pub.h  \
+	lqr_energy_priv.h  \
 	lqr_cursor.c    \
 	lqr_cursor.h    \
 	lqr_cursor_pub.h    \
@@ -20,6 +28,7 @@ liblqr_1_la_SOURCES = \
 	lqr_carver.h    \
 	lqr_carver_pub.h    \
 	lqr_carver_priv.h    \
+	lqr_carver_macros_priv.h    \
 	lqr_carver_list.c    \
 	lqr_carver_list.h    \
 	lqr_carver_list_pub.h    \
@@ -45,7 +54,8 @@ liblqr_1_la_SOURCES = \
 	lqr_progress_pub.h  \
 	lqr_progress_priv.h
 
-liblqr_1_la_LDFLAGS = -version-info @LTVERSION@
+liblqr_1_la_LDFLAGS = -version-info @LTVERSION@ @LT_NOUNDEF_FLAG@
+
 liblqr_1_la_LIBADD = $(GLIB_LIBS) -lm
 
 AM_CPPFLAGS = \
@@ -53,7 +63,7 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir)		\
 	@GLIB_CFLAGS@		\
 	-I$(includedir)		\
-	-fvisibility=hidden
+	@FVISIBILITY_FLAG@
 
 lqr_include0_HEADERS = lqr.h
 
@@ -61,6 +71,8 @@ lqr_include0dir = $(includedir)/@LIBRARY_SNAME@
 
 lqr_include_HEADERS = lqr_base.h \
 		      lqr_gradient_pub.h \
+		      lqr_rwindow_pub.h \
+		      lqr_energy_pub.h \
 		      lqr_cursor_pub.h \
 		      lqr_carver_pub.h \
 		      lqr_carver_list_pub.h \
