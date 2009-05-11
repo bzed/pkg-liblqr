@@ -1,5 +1,5 @@
 
-LiquidRescale library 0.2.0
+LiquidRescale library 0.4.0
 ===========================
 
 Table of contents
@@ -29,6 +29,8 @@ Following is a list of features:
 
   * Easy to use API
   * Currently supports 8 bit to 64 bit per channel images
+  * Support for different color models: grayscale, RGB, CMY
+    and even custom ones
   * Areas in the image can be marked for preservation or
     discard, or for additional seam rigidity
   * Once the image has been fully processed, the scaling can
@@ -39,13 +41,16 @@ Following is a list of features:
     can also work in successive steps without wasting
     computational time
   * Possibility to tune the carving operation by letting the
-    seams be less connected, or more rigid, or both 
+    seams be less connected, or more rigid, or both (the
+    rigidity can be also be modulated through a mask, to get
+    a differnet behaviour in different areas of the image)
   * Can export and import the visibility map (the seams)
   * Other images can be attached and undergo the same carving
     process as the parent image 
   * The automatic feature detection algorithm can be tuned
-    by selecting among different energy gradient functions
-  * Reports progress through a customizable interface
+    by selecting among different energy gradient functions,
+    and even defining custom ones
+  * Reports progress through a customisable interface
   * A signalling system permits to cleanly handle errors
 
 
@@ -62,14 +67,16 @@ The lqr library depends on the glib-2.0 libraries
 The build package uses autotools and libtool, so the installation
 commands on Unix systems are simply
 
-./configure --prefix=/usr && make && sudo make install
+./configure && make && sudo make install
 
 The last step requires administrative privileges.
-(If the dynamic linker path includes /usr/local/lib, the `--prefix'
-option is not needed.)
+(Note: the default installation path is /usr since version 0.4)
 
 If you want to also install the man pages for the library functions,
 add the option `--enable-install-man' in the call to ./configure.
+
+If you wand to disable legacy macro names which do not begin with
+LQR_ then add the option `--diable-legacy-macros'
 
 See the INSTALL file for a full description.
 
@@ -89,7 +96,7 @@ the proper flags.
 
 In the `examples' directory you can find a basic example program,
 `liquidrescale-basic', and a full-featured demo program,
-`liquidrescale', toghether with a simple Makefile. Both
+`liquidrescale', together with a simple Makefile. Both
 programs are fully commented.
 
 The "basic" version demonstrates how to use the strictly-needed 
@@ -122,5 +129,5 @@ http://www.faculty.idc.ac.il/arik/imret.pdf
 + Copyright
 -----------
 
-Copyright (C) 2007-2008 Carlo Baldassi <carlobaldassi@gmail.com>
+Copyright (C) 2007-2009 Carlo Baldassi <carlobaldassi@gmail.com>
 

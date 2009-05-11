@@ -15,10 +15,14 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- 
+
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program; if not, see <http://www.gnu.org/licenses/> 
+ * along with this program; if not, see <http://www.gnu.org/licenses/>
  */
+
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
 
 #include <lqr/lqr_all.h>
 
@@ -28,150 +32,195 @@
 
 /**** LQR_CARVER_RIGMASK STRUCT FUNTIONS ****/
 
-LqrRetVal
-lqr_carver_rigmask_init (LqrCarver *r)
+/* LQR_PUBLIC */
+void
+lqr_carver_rigmask_clear(LqrCarver *r)
 {
-  gint y, x;
-
-  CATCH_F (r->active == TRUE);
-
-  CATCH_MEM (r->rigidity_mask = g_try_new (gfloat, r->w * r->h));
-
-  for (y = 0; y < r->h; y++)
-    {
-      for (x = 0; x < r->w_start; x++)
-        {
-	  r->rigidity_mask[y * r->w_start + x] = 1;
-	}
-    }
-  return LQR_OK;
+    g_free(r->rigidity_mask);
+    r->rigidity_mask = NULL;
 }
 
+LqrRetVal
+lqr_carver_rigmask_init(LqrCarver *r)
+{
+    /* gint y, x; */
 
-LQR_PUBLIC
+    LQR_CATCH_CANC(r);
+
+    LQR_CATCH_F(r->active);
+
+    LQR_CATCH_MEM(r->rigidity_mask = g_try_new0(gfloat, r->w0 * r->h0));
+
+#if 0
+    for (y = 0; y < r->h0; y++) {
+        for (x = 0; x < r->w0; x++) {
+            r->rigidity_mask[y * r->w0 + x] = 1;
+        }
+    }
+#endif
+
+    return LQR_OK;
+}
+
+/* LQR_PUBLIC */
+LqrRetVal
+lqr_carver_rigmask_add_xy(LqrCarver *r, gdouble rigidity, gint x, gint y)
+{
+    gint xt, yt;
+
+    LQR_CATCH_CANC(r);
+
+    LQR_CATCH_F(r->active);
+
+    if ((r->w != r->w0) || (r->w_start != r->w0) || (r->h != r->h0) || (r->h_start != r->h0)) {
+        LQR_CATCH(lqr_carver_flatten(r));
+    }
+
+    if (r->rigidity_mask == NULL) {
+        LQR_CATCH(lqr_carver_rigmask_init(r));
+    }
+#if 0
+    if (r->rigidity == 0) {
+        return LQR_OK;
+    }
+#endif
+
+    xt = r->transposed ? y : x;
+    yt = r->transposed ? x : y;
+
+    r->rigidity_mask[yt * r->w0 + xt] += (gfloat) rigidity;
+
+    return LQR_OK;
+}
+
+/* LQR_PUBLIC */
 LqrRetVal
 lqr_carver_rigmask_add_area(LqrCarver *r, gdouble *buffer, gint width, gint height, gint x_off, gint y_off)
 {
-  gint x, y;
-  gint x1, y1, x2, y2;
+    gint x, y;
+    gint xt, yt;
+    gint wt, ht;
+    gint x0, y0, x1, y1, x2, y2;
 
-  CATCH_F (r->active);
-  if (r->rigidity_mask == NULL)
-    {
-      CATCH (lqr_carver_rigmask_init(r));
+    LQR_CATCH_CANC(r);
+
+    LQR_CATCH_F(r->active);
+
+    if ((r->w != r->w0) || (r->w_start != r->w0) || (r->h != r->h0) || (r->h_start != r->h0)) {
+        LQR_CATCH(lqr_carver_flatten(r));
+    }
+#if 0
+    if (r->rigidity == 0) {
+        return LQR_OK;
+    }
+#endif
+
+    if (r->rigidity_mask == NULL) {
+        LQR_CATCH(lqr_carver_rigmask_init(r));
     }
 
+    wt = r->transposed ? r->h : r->w;
+    ht = r->transposed ? r->w : r->h;
 
-  if (r->rigidity == 0)
-    {
-      return LQR_OK;
-    }
+    x0 = MIN(0, x_off);
+    y0 = MIN(0, y_off);
+    x1 = MAX(0, x_off);
+    y1 = MAX(0, y_off);
+    x2 = MIN(wt, width + x_off);
+    y2 = MIN(ht, height + y_off);
 
-  if (r->transposed)
-    {
-      CATCH (lqr_carver_transpose(r));
-    }
+    for (y = 0; y < y2 - y1; y++) {
+        for (x = 0; x < x2 - x1; x++) {
+            xt = r->transposed ? y : x;
+            yt = r->transposed ? x : y;
 
-  x1 = MAX (0, x_off);
-  y1 = MAX (0, y_off);
-  x2 = MIN (r->w, width + x_off);
-  y2 = MIN (r->h, height + y_off);
-
-  for (y = 0; y < y2 - y1; y++)
-    {
-      for (x = 0; x < x2 - x1; x++)
-        {
-          r->rigidity_mask[(y + y1) * r->w0 + (x + x1)] = (gfloat) buffer[y * width + x];
+            r->rigidity_mask[(yt + y1) * r->w0 + (xt + x1)] = (gfloat) buffer[(y - y0) * width + (x - x0)];
         }
 
     }
 
-  return LQR_OK;
+    return LQR_OK;
 }
 
-
-LQR_PUBLIC
+/* LQR_PUBLIC */
 LqrRetVal
 lqr_carver_rigmask_add(LqrCarver *r, gdouble *buffer)
 {
-  return lqr_carver_rigmask_add_area(r, buffer, r->w0, r->h0, 0, 0);
+    return lqr_carver_rigmask_add_area(r, buffer, r->w0, r->h0, 0, 0);
 }
 
-LQR_PUBLIC
+/* LQR_PUBLIC */
 LqrRetVal
-lqr_carver_rigmask_add_rgb_area(LqrCarver *r, guchar *rgb, gint channels, gint width, gint height, gint x_off, gint y_off)
+lqr_carver_rigmask_add_rgb_area(LqrCarver *r, guchar *rgb, gint channels, gint width, gint height, gint x_off,
+                                gint y_off)
 {
-  gint x, y, k, c_channels;
-  gboolean has_alpha;
-  gint x0, y0, x1, y1, x2, y2;
-  gint transposed = 0;
-  gint sum;
-  gdouble rigmask;
+    gint x, y, k, c_channels;
+    gboolean has_alpha;
+    gint xt, yt;
+    gint wt, ht;
+    gint x0, y0, x1, y1, x2, y2;
+    gint sum;
+    gdouble rigmask;
 
-  CATCH_F (r->active);
-  if (r->rigidity_mask == NULL)
-    {
-      CATCH (lqr_carver_rigmask_init(r));
+    LQR_CATCH_CANC(r);
+
+    LQR_CATCH_F(r->active);
+
+    if ((r->w != r->w0) || (r->w_start != r->w0) || (r->h != r->h0) || (r->h_start != r->h0)) {
+        LQR_CATCH(lqr_carver_flatten(r));
+    }
+#if 0
+    if (r->rigidity == 0) {
+        return LQR_OK;
+    }
+#endif
+
+    if (r->rigidity_mask == NULL) {
+        LQR_CATCH(lqr_carver_rigmask_init(r));
     }
 
-  if (r->rigidity == 0)
-    {
-      return TRUE;
-    }
+    has_alpha = (channels == 2 || channels >= 4);
+    c_channels = channels - (has_alpha ? 1 : 0);
 
-  CATCH (lqr_carver_flatten(r));
-  if (r->transposed)
-    {
-      transposed = 1;
-      CATCH (lqr_carver_transpose(r));
-    }
+    wt = r->transposed ? r->h : r->w;
+    ht = r->transposed ? r->w : r->h;
 
-  has_alpha = (channels == 2 || channels >= 4);
-  c_channels = channels - (has_alpha ? 1 : 0);
+    x0 = MIN(0, x_off);
+    y0 = MIN(0, y_off);
+    x1 = MAX(0, x_off);
+    y1 = MAX(0, y_off);
+    x2 = MIN(wt, width + x_off);
+    y2 = MIN(ht, height + y_off);
 
-  x0 = MIN (0, x_off);
-  y0 = MIN (0, y_off);
-  x1 = MAX (0, x_off);
-  y1 = MAX (0, y_off);
-  x2 = MIN (r->w0, width + x_off);
-  y2 = MIN (r->h0, height + y_off);
-
-  for (y = 0; y < y2 - y1; y++)
-    {
-      for (x = 0; x < x2 - x1; x++)
-        {
-          sum = 0;
-          for (k = 0; k < c_channels; k++)
-            {
-              sum += rgb[((y - y0) * width + (x - x0)) * channels + k];
+    for (y = 0; y < y2 - y1; y++) {
+        for (x = 0; x < x2 - x1; x++) {
+            sum = 0;
+            for (k = 0; k < c_channels; k++) {
+                sum += rgb[((y - y0) * width + (x - x0)) * channels + k];
             }
 
-          rigmask = (gdouble) sum / (255 * c_channels);
-          if (has_alpha)
-            {
-	      rigmask *= (gdouble) rgb[((y - y0) * width + (x - x0) + 1) * channels - 1] / 255;
+            rigmask = (gdouble) sum / (255 * c_channels);
+            if (has_alpha) {
+                rigmask *= (gdouble) rgb[((y - y0) * width + (x - x0) + 1) * channels - 1] / 255;
             }
 
-          r->rigidity_mask[(y + y1) * r->w0 + (x + x1)] = (gfloat) rigmask;
+            xt = r->transposed ? y : x;
+            yt = r->transposed ? x : y;
+
+            r->rigidity_mask[(yt + y1) * r->w0 + (xt + x1)] = (gfloat) rigmask;
 
         }
 
     }
 
-  if (transposed)
-    {
-      CATCH (lqr_carver_transpose(r));
-    }
-
-  return LQR_OK;
+    return LQR_OK;
 }
 
-LQR_PUBLIC
+/* LQR_PUBLIC */
 LqrRetVal
 lqr_carver_rigmask_add_rgb(LqrCarver *r, guchar *rgb, gint channels)
 {
-  return lqr_carver_rigmask_add_rgb_area(r, rgb, channels, r->w0, r->h0, 0, 0);
+    return lqr_carver_rigmask_add_rgb_area(r, rgb, channels, r->w0, r->h0, 0, 0);
 }
-
 
 /**** END OF LQR_CARVER_RIGMASK CLASS FUNCTIONS ****/

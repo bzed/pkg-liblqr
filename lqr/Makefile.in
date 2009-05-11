@@ -41,10 +41,7 @@ subdir = lqr
 DIST_COMMON = $(lqr_include0_HEADERS) $(lqr_include_HEADERS) \
 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
-	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
-	$(top_srcdir)/m4/ltversion.m4 $(top_srcdir)/m4/lt~obsolete.m4 \
-	$(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -62,9 +59,10 @@ lqrLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(lqr_LTLIBRARIES)
 am__DEPENDENCIES_1 =
 liblqr_1_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
-am_liblqr_1_la_OBJECTS = lqr_gradient.lo lqr_cursor.lo lqr_carver.lo \
-	lqr_carver_list.lo lqr_carver_bias.lo lqr_carver_rigmask.lo \
-	lqr_vmap.lo lqr_vmap_list.lo lqr_progress.lo
+am_liblqr_1_la_OBJECTS = lqr_gradient.lo lqr_rwindow.lo lqr_energy.lo \
+	lqr_cursor.lo lqr_carver.lo lqr_carver_list.lo \
+	lqr_carver_bias.lo lqr_carver_rigmask.lo lqr_vmap.lo \
+	lqr_vmap_list.lo lqr_progress.lo
 liblqr_1_la_OBJECTS = $(am_liblqr_1_la_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -91,6 +89,7 @@ AMDEP_TRUE = @AMDEP_TRUE@
 AMTAR = @AMTAR@
 API_VERSION = @API_VERSION@
 AR = @AR@
+AS = @AS@
 AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
@@ -100,10 +99,15 @@ CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
+CXX = @CXX@
+CXXCPP = @CXXCPP@
+CXXDEPMODE = @CXXDEPMODE@
+CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DATADIR = @DATADIR@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
@@ -112,6 +116,7 @@ ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
+FVISIBILITY_FLAG = @FVISIBILITY_FLAG@
 GLIB_CFLAGS = @GLIB_CFLAGS@
 GLIB_DIR = @GLIB_DIR@
 GLIB_LIBS = @GLIB_LIBS@
@@ -134,12 +139,14 @@ LIPO = @LIPO@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 LTVERSION = @LTVERSION@
+LT_NOUNDEF_FLAG = @LT_NOUNDEF_FLAG@
 MAINT = @MAINT@
 MAINTAINER_MODE_FALSE = @MAINTAINER_MODE_FALSE@
 MAINTAINER_MODE_TRUE = @MAINTAINER_MODE_TRUE@
 MAKEINFO = @MAKEINFO@
 NM = @NM@
 NMEDIT = @NMEDIT@
+OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 OTOOL = @OTOOL@
 OTOOL64 = @OTOOL64@
@@ -158,9 +165,12 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 VERSION = @VERSION@
 ac_ct_CC = @ac_ct_CC@
+ac_ct_CXX = @ac_ct_CXX@
 ac_ct_DUMPBIN = @ac_ct_DUMPBIN@
 am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
 am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
+am__fastdepCXX_FALSE = @am__fastdepCXX_FALSE@
+am__fastdepCXX_TRUE = @am__fastdepCXX_TRUE@
 am__include = @am__include@
 am__leading_dot = @am__leading_dot@
 am__quote = @am__quote@
@@ -212,6 +222,14 @@ liblqr_1_la_SOURCES = \
 	lqr_gradient.h  \
 	lqr_gradient_pub.h  \
 	lqr_gradient_priv.h  \
+	lqr_rwindow.c  \
+	lqr_rwindow.h  \
+	lqr_rwindow_pub.h  \
+	lqr_rwindow_priv.h  \
+	lqr_energy.c  \
+	lqr_energy.h  \
+	lqr_energy_pub.h  \
+	lqr_energy_priv.h  \
 	lqr_cursor.c    \
 	lqr_cursor.h    \
 	lqr_cursor_pub.h    \
@@ -220,6 +238,7 @@ liblqr_1_la_SOURCES = \
 	lqr_carver.h    \
 	lqr_carver_pub.h    \
 	lqr_carver_priv.h    \
+	lqr_carver_macros_priv.h    \
 	lqr_carver_list.c    \
 	lqr_carver_list.h    \
 	lqr_carver_list_pub.h    \
@@ -245,19 +264,21 @@ liblqr_1_la_SOURCES = \
 	lqr_progress_pub.h  \
 	lqr_progress_priv.h
 
-liblqr_1_la_LDFLAGS = -version-info @LTVERSION@
+liblqr_1_la_LDFLAGS = -version-info @LTVERSION@ @LT_NOUNDEF_FLAG@
 liblqr_1_la_LIBADD = $(GLIB_LIBS) -lm
 AM_CPPFLAGS = \
 	-DDATADIR=\""$(DATADIR)"\"		\
 	-I$(top_srcdir)		\
 	@GLIB_CFLAGS@		\
 	-I$(includedir)		\
-	-fvisibility=hidden
+	@FVISIBILITY_FLAG@
 
 lqr_include0_HEADERS = lqr.h
 lqr_include0dir = $(includedir)/@LIBRARY_SNAME@
 lqr_include_HEADERS = lqr_base.h \
 		      lqr_gradient_pub.h \
+		      lqr_rwindow_pub.h \
+		      lqr_energy_pub.h \
 		      lqr_cursor_pub.h \
 		      lqr_carver_pub.h \
 		      lqr_carver_list_pub.h \
@@ -342,8 +363,10 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lqr_carver_list.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lqr_carver_rigmask.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lqr_cursor.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lqr_energy.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lqr_gradient.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lqr_progress.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lqr_rwindow.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lqr_vmap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lqr_vmap_list.Plo@am__quote@
 

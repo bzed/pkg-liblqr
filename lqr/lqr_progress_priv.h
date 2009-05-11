@@ -15,38 +15,31 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- 
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program; if not, see <http://www.gnu.org/licenses/> 
- */
 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, see <http://www.gnu.org/licenses/>
+ */
 
 #ifndef __LQR_PROGRESS_PRIV_H__
 #define __LQR_PROGRESS_PRIV_H__
 
 /*** LQR_PROGRESS CLASS DEFINITION ***/
 
-struct _LqrProgress
-{
-  gfloat update_step;
-  LqrProgressFuncInit init;
-  LqrProgressFuncUpdate update;
-  LqrProgressFuncEnd end;
-  gchar init_width_message[LQR_PROGRESS_MAX_MESSAGE_LENGTH];
-  gchar end_width_message[LQR_PROGRESS_MAX_MESSAGE_LENGTH];
-  gchar init_height_message[LQR_PROGRESS_MAX_MESSAGE_LENGTH];
-  gchar end_height_message[LQR_PROGRESS_MAX_MESSAGE_LENGTH];
+struct _LqrProgress {
+    gfloat update_step;
+    LqrProgressFuncInit init;
+    LqrProgressFuncUpdate update;
+    LqrProgressFuncEnd end;
+    gchar init_width_message[LQR_PROGRESS_MAX_MESSAGE_LENGTH];
+    gchar end_width_message[LQR_PROGRESS_MAX_MESSAGE_LENGTH];
+    gchar init_height_message[LQR_PROGRESS_MAX_MESSAGE_LENGTH];
+    gchar end_height_message[LQR_PROGRESS_MAX_MESSAGE_LENGTH];
 };
 
 /* LQR_PROGRESS CLASS PRIVATE FUNCTIONS */
 
-LqrRetVal lqr_progress_init(LqrProgress * p, const gchar * message);
+LqrRetVal lqr_progress_init(LqrProgress * p, const gchar *message);
 LqrRetVal lqr_progress_update(LqrProgress * p, gdouble percentage);
-LqrRetVal lqr_progress_end(LqrProgress * p, const gchar * message);
-
+LqrRetVal lqr_progress_end(LqrProgress * p, const gchar *message);
 
 #endif /* __LQR_PROGRESS_PRIV_H__ */
-
-
-
-

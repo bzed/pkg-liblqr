@@ -15,9 +15,9 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- 
+
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program; if not, see <http://www.gnu.org/licenses/> 
+ * along with this program; if not, see <http://www.gnu.org/licenses/>
  */
 
 #ifndef __LQR_CARVER_RIGMASK_PUB_H__
@@ -29,10 +29,13 @@
 
 /* PUBLIC RIGMASK-RELATED FUNCTIONS */
 
-LqrRetVal lqr_carver_rigmask_add_rgb_area(LqrCarver *r, guchar *buffer, gint channels, gint width, gint height, gint x_off, gint y_off);
-LqrRetVal lqr_carver_rigmask_add_rgb(LqrCarver *r, guchar *buffer, gint channels);
-LqrRetVal lqr_carver_rigmask_add_area(LqrCarver *r, gdouble *buffer, gint width, gint height, gint x_off, gint y_off);
-LqrRetVal lqr_carver_rigmask_add(LqrCarver *r, gdouble *buffer);
-
+LQR_PUBLIC void lqr_carver_rigmask_clear(LqrCarver *r);
+LQR_PUBLIC LqrRetVal lqr_carver_rigmask_add_xy(LqrCarver *r, gdouble rigidity, gint x, gint y);
+LQR_PUBLIC LqrRetVal lqr_carver_rigmask_add_rgb_area(LqrCarver *r, guchar *buffer, gint channels, gint width,
+                                                     gint height, gint x_off, gint y_off);
+LQR_PUBLIC LqrRetVal lqr_carver_rigmask_add_rgb(LqrCarver *r, guchar *buffer, gint channels);
+LQR_PUBLIC LqrRetVal lqr_carver_rigmask_add_area(LqrCarver *r, gdouble *buffer, gint width, gint height, gint x_off,
+                                                 gint y_off);
+LQR_PUBLIC LqrRetVal lqr_carver_rigmask_add(LqrCarver *r, gdouble *buffer);
 
 #endif /* __LQR_CARVER_RIGMASK_PUB_H__ */

@@ -15,9 +15,9 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- 
+
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program; if not, see <http://www.gnu.org/licenses/> 
+ * along with this program; if not, see <http://www.gnu.org/licenses/>
  */
 
 #ifndef __LQR_CURSOR_PUB_H__
@@ -29,7 +29,7 @@
 
 /* LQR_CURSOR CLASS DECLARATION */
 
-struct _LqrCursor;              /* a "smart" index to read the carver */
+struct _LqrCursor;                      /* a "smart" index to read the carver */
 typedef struct _LqrCursor LqrCursor;
 
 /* LQR_CURSOR CLASS PUBLIC FUNCTIONS */

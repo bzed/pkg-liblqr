@@ -15,9 +15,9 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- 
+
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program; if not, see <http://www.gnu.org/licenses/> 
+ * along with this program; if not, see <http://www.gnu.org/licenses/>
  */
 
 #ifndef __LQR_VMAP_PRIV_H__
@@ -29,13 +29,12 @@
 
 /*** LQR_VMAP CLASS DEFINITION ***/
 
-struct _LqrVMap
-{
-  gint * buffer;
-  gint width;
-  gint height;
-  gint depth;
-  gint orientation;
+struct _LqrVMap {
+    gint *buffer;
+    gint width;
+    gint height;
+    gint depth;
+    gint orientation;
 };
 
 /* LQR_VMAP CLASS PRIVATE FUNCTIONS */
@@ -43,4 +42,3 @@ struct _LqrVMap
 /* no private functions currently */
 
 #endif /* __LQR_VMAP_PRIV_H__ */
-
