@@ -1,3 +1,10 @@
+liblqr (0.4.1-1) unstable; urgency=low
+
+  * [fac8a658] Adding git-buildpackage configuration.
+  * [3ed4d619] Imported Upstream version 0.4.1
+
+ -- Bernd Zeimetz <bzed@debian.org>  Fri, 15 May 2009 10:50:48 +0200
+
 liblqr (0.4.0-1) unstable; urgency=low
 
   * [6ca66abd] Sanity check for the right soname in debian/rules.
