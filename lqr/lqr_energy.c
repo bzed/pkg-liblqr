@@ -44,7 +44,7 @@
 
 /* read normalised pixel value from
  * rgb buffer at the given index */
-inline gdouble
+gdouble
 lqr_pixel_get_norm(void *rgb, gint rgb_ind, LqrColDepth col_depth)
 {
     switch (col_depth) {
@@ -66,7 +66,7 @@ lqr_pixel_get_norm(void *rgb, gint rgb_ind, LqrColDepth col_depth)
 
 /* write pixel from normalised value
  * in rgb buffer at the given index */
-inline void
+void
 lqr_pixel_set_norm(gdouble val, void *rgb, gint rgb_ind, LqrColDepth col_depth)
 {
     switch (col_depth) {
@@ -90,7 +90,7 @@ lqr_pixel_set_norm(gdouble val, void *rgb, gint rgb_ind, LqrColDepth col_depth)
     }
 }
 
-inline gdouble
+gdouble
 lqr_pixel_get_rgbcol(void *rgb, gint rgb_ind, LqrColDepth col_depth, LqrImageType image_type, gint channel)
 {
     gdouble black_fact = 0;
@@ -115,7 +115,7 @@ lqr_pixel_get_rgbcol(void *rgb, gint rgb_ind, LqrColDepth col_depth, LqrImageTyp
     }
 }
 
-inline gdouble
+gdouble
 lqr_carver_read_brightness_grey(LqrCarver *r, gint x, gint y)
 {
     gint now = r->raw[y][x];
@@ -123,7 +123,7 @@ lqr_carver_read_brightness_grey(LqrCarver *r, gint x, gint y)
     return lqr_pixel_get_norm(r->rgb, rgb_ind, r->col_depth);
 }
 
-inline gdouble
+gdouble
 lqr_carver_read_brightness_std(LqrCarver *r, gint x, gint y)
 {
     gdouble red, green, blue;
@@ -205,7 +205,7 @@ lqr_carver_read_brightness(LqrCarver *r, gint x, gint y)
     return bright * alpha_fact;
 }
 
-inline gdouble
+gdouble
 lqr_carver_read_luma_std(LqrCarver *r, gint x, gint y)
 {
     gdouble red, green, blue;
@@ -617,7 +617,6 @@ lqr_carver_get_true_energy(LqrCarver *r, gfloat *buffer, gint orientation)
     gint x, y;
     gint z0 = 0;
     gint w, h;
-    gint buf_size;
     gint data;
 
     LQR_CATCH_F(orientation == 0 || orientation == 1);
@@ -634,8 +633,6 @@ lqr_carver_get_true_energy(LqrCarver *r, gfloat *buffer, gint orientation)
 #endif /* __LQR_DEBUG__ */
         LQR_CATCH(lqr_carver_flatten(r));
     }
-
-    buf_size = r->w * r->h;
 
     if (orientation != lqr_carver_get_orientation(r)) {
         LQR_CATCH(lqr_carver_transpose(r));

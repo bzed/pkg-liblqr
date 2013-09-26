@@ -15,13 +15,13 @@ m4_define([library_name], [liblqr-api_version])
 dnl These three define the library version number
 m4_define([package_major_version], [0])
 m4_define([package_minor_version], [4])
-m4_define([package_micro_version], [1])
+m4_define([package_micro_version], [2])
 
 m4_define([package_version],
           [package_major_version.package_minor_version.package_micro_version])
 
 m4_define([ltversion_current], [3])
-m4_define([ltversion_revision], [1])
+m4_define([ltversion_revision], [2])
 m4_define([ltversion_age], [3])
 
 AC_INIT([library_name], [package_version])
@@ -132,7 +132,7 @@ AS_IF([test "x$legacy_macros" = "xfalse"],
       [:]
       )
 
-AC_ARG_ENABLE([dllimport],
+AC_ARG_ENABLE([declspec],
      [AS_HELP_STRING([--disable-declspec], [Disable Win32 __declspec directives (only meaningful for building static library on MinGW)])],
      [AS_CASE([["${enableval}"]],
 	  [yes], [declspec=true],
