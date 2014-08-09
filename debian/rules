@@ -42,7 +42,7 @@ ifneq "$(wildcard /usr/share/misc/config.guess)" ""
 	cp -f /usr/share/misc/config.guess config.guess
 endif
 	./configure $(CROSS) --prefix=/usr CFLAGS="$(CFLAGS)" --libdir=/usr/lib/$(strip $(shell dpkg-architecture -qDEB_HOST_MULTIARCH))\
-		LDFLAGS="-Wl,-z,defs" --enable-install-man
+		LDFLAGS="-Wl,-z,defs" 
 
 build: build-stamp
 build-stamp: config.status 
