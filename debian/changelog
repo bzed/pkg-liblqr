@@ -1,3 +1,13 @@
+liblqr (0.4.2-1) unstable; urgency=medium
+
+  * [7038c1a1] Fixing watch file.
+  * [0d1f2b1f] Merge tag 'upstream/0.4.2'
+    Upstream version 0.4.2
+  * [e1fd1c94] Manpages went missing in upstream source.
+    Don't install them.
+
+ -- Bernd Zeimetz <bzed@debian.org>  Sat, 09 Aug 2014 11:41:12 +0200
+
 liblqr (0.4.1-2) unstable; urgency=low
 
   * [72c1e4e5] Ack NMU.
