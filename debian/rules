@@ -31,16 +31,7 @@ LIB_version := $(LIB_soname).$(LIB_version_age).$(LIB_version_revision)
 
 config.status: configure
 	dh_testdir
-	# Add here commands to configure the package.
-	# it saves upstream version of config.{sub,guess}
-ifneq "$(wildcard /usr/share/misc/config.sub)" ""
-	[ -e config.sub.debian ] || cp -pf config.sub config.sub.debian
-	cp -f /usr/share/misc/config.sub config.sub
-endif
-ifneq "$(wildcard /usr/share/misc/config.guess)" ""
-	[ -e config.guess.debian ] || cp -pf config.guess config.guess.debian
-	cp -f /usr/share/misc/config.guess config.guess
-endif
+	dh_autoreconf
 	./configure $(CROSS) --prefix=/usr CFLAGS="$(CFLAGS)" --libdir=/usr/lib/$(strip $(shell dpkg-architecture -qDEB_HOST_MULTIARCH))\
 		LDFLAGS="-Wl,-z,defs" 
 
@@ -69,8 +60,7 @@ clean:
 	rm -rf docs/html
 
 	# restore upstream version of config.{sub,guess}
-	[ ! -e config.sub.debian ] || mv -f config.sub.debian config.sub
-	[ ! -e config.guess.debian ] || mv -f config.guess.debian config.guess
+	dh_autoreconf_clean
 
 	dh_clean 
 
