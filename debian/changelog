@@ -1,3 +1,11 @@
+liblqr (0.4.2-2) unstable; urgency=medium
+
+  * [fea32719] Use debian source format 3.0 (quilt)
+  * [4d8cb620] Run dh_autoreconf to support new architectures.
+    Thanks to Breno Leitao (Closes: #757815)
+
+ -- Bernd Zeimetz <bzed@debian.org>  Tue, 12 Aug 2014 01:12:02 +0200
+
 liblqr (0.4.2-1) unstable; urgency=medium
 
   * [7038c1a1] Fixing watch file.
